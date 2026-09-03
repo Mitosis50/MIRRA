@@ -58,7 +58,7 @@ jobs:
         with:
           subject-path: release/mirra_canister.wasm
           sbom-path: security/mirra-canister.cdx.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: mirra-release-${{ github.sha }}
           path: release/

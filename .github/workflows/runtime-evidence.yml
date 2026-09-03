@@ -37,7 +37,7 @@ jobs:
           bash scripts/verify-runtime.sh 2>&1 | tee "$RUNNER_TEMP/mirra-runtime.log"
       - name: Preserve runtime log
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: mirra-runtime-${{ github.sha }}
           path: ${{ runner.temp }}/mirra-runtime.log
