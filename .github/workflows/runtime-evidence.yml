@@ -1,0 +1,44 @@
+name: MIRRA runtime evidence
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'integration-tests/**'
+      - 'artifacts/**'
+      - 'scripts/verify-runtime.sh'
+      - 'verification/runtime_preflight.py'
+      - '.github/workflows/runtime-evidence.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  runtime:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Rust components
+        run: rustup show
+      - name: Install hash-pinned PocketIC server
+        run: |
+          curl --fail --location --silent --show-error \
+            https://github.com/dfinity/pocketic/releases/download/15.0.0/pocket-ic-x86_64-linux.gz \
+            --output "$RUNNER_TEMP/pocket-ic.gz"
+          gzip --decompress "$RUNNER_TEMP/pocket-ic.gz"
+          echo "29472ea4433b30a280676c4e22e369d79d5ba6ee1b4d48bab32ebe7d0ad2b4bb  $RUNNER_TEMP/pocket-ic" | sha256sum --check
+          chmod +x "$RUNNER_TEMP/pocket-ic"
+      - name: Verify packaged RC5 retry, upgrade and certificates
+        env:
+          POCKET_IC_BIN: ${{ runner.temp }}/pocket-ic
+        run: |
+          set -o pipefail
+          bash scripts/verify-runtime.sh 2>&1 | tee "$RUNNER_TEMP/mirra-runtime.log"
+      - name: Preserve runtime log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mirra-runtime-${{ github.sha }}
+          path: ${{ runner.temp }}/mirra-runtime.log
+          if-no-files-found: warn

@@ -1,0 +1,54 @@
+{
+  "date_utc": "2026-09-01",
+  "release_ready": false,
+  "source_baseline_commit": "09284efc0975cc167a43fee80adfefe616061830",
+  "whitespace_only_commit": "a2cd307702d951bad0e5ecd005514cc1373d1b2e",
+  "current_wasm": {
+    "path": "artifacts/mirra_canister.wasm",
+    "sha256": "acf963dadeb9eeb4c7ee5e6065045a1dcdc93af0700ce47868b5b2aa7485dfa2",
+    "bytes": 878189,
+    "historical_digest_is_not_current": true
+  },
+  "rustc": "1.88.0 (6b00bc388 2025-06-23)",
+  "llvm": "20.1.5",
+  "vectors": {
+    "count": 99,
+    "sha256": "21c64f9ea4aef2440f3a3929497551b4d289b49fee28753d4a1f4412bef01b1b",
+    "unchanged_from_baseline_git": true,
+    "deterministic_regeneration": "passed",
+    "post_format_golden_conformance": "passed"
+  },
+  "native_tests": {"conformance": 6, "protocol": 6, "failed": 0},
+  "integration_compile": "passed_on_single_job_nonincremental_retry",
+  "integration_runtime_passed": false,
+  "main_clippy": "passed",
+  "integration_clippy": "passed",
+  "dfx_build_check": "passed",
+  "reproducible_clean_builds": 3,
+  "security": {
+    "cargo_audit_version": "0.22.2",
+    "database_commit": "72f8b23d78ea6c4c9ded301a4c6ec4260e8b4c27",
+    "database_last_updated": "2026-09-01T09:55:13+02:00",
+    "advisories": 1235,
+    "known_vulnerabilities_main": 0,
+    "known_vulnerabilities_integration": 0,
+    "warnings_main": 1,
+    "warnings_integration": 4,
+    "reviewed_warning_set_exact": true,
+    "review_due": "2026-11-30",
+    "cargo_cyclonedx_version": "0.5.9",
+    "sbom_components_main": 49,
+    "sbom_components_integration": 290,
+    "sbom_same_path_reproduction": "passed",
+    "sbom_alternate_path_normalized_reproduction": "passed"
+  },
+  "gates": [
+    {"id": 1, "name": "genuine_p1_certificate", "status": "open", "reason": "Missing original binary, schema/proof checker, and provenance"},
+    {"id": 2, "name": "rust_1_88_rebuild", "status": "passed"},
+    {"id": 3, "name": "candid_byte_equality", "status": "passed", "extractor_version": "0.1.6", "candid_sha256": "b9f031d8dc354d93935b1bc29001b875a3616cc55a7dfc95ec3ccae6250765f8"},
+    {"id": 4, "name": "pocketic_1_1_2_upgrade", "status": "blocked", "reason": "Previously observed host Unix-socket permission denial; runtime assertions not executed in recovery run"},
+    {"id": 5, "name": "certificate_trusted_root", "status": "blocked", "reason": "Compiled delegated-root/negative checks require PocketIC runtime; no live mainnet proof"},
+    {"id": 6, "name": "upstream_review_signature", "status": "open", "reason": "No authoritative upstream review or signature"},
+    {"id": 7, "name": "transitive_crate_hardening", "status": "contained_not_eliminated", "reason": "Zero known vulnerabilities and exact reviewed exceptions; unmaintained crates remain"}
+  ]
+}
