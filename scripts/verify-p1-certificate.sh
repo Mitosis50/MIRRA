@@ -32,4 +32,12 @@ if [[ "${actual}" != "${expected}" ]]; then
   echo "actual:   ${actual}" >&2
   exit 1
 fi
-echo "PASS: P1 certificate bytes match ${expected}"
+checker="${project_root}/verification/p1/check_candidate.py"
+if [[ ! -s "${checker}" ]]; then
+  echo "FAIL: required P1 proof checker is missing; a hash match alone is insufficient." >&2
+  exit 1
+fi
+# The staged source pin must not silently turn pending review into approval.
+# This also recomputes the repository's canonical proof, both pins and bindings.
+python3 "${checker}" --release
+echo "PASS: P1 certificate bytes match ${expected}; recorded review gate satisfied"

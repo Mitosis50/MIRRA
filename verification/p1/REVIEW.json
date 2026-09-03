@@ -1,0 +1,17 @@
+{
+  "schema": "mirra.p1.review-decision.v1",
+  "decision": "pending",
+  "proof_sha256": "37f218d3fb9695dbc62cd60955337067b6e55fa45a4d8c0a93ef8415278a3a2d",
+  "checker_sha256": "5fa62f9a54d4d06755c256e52d78e007b59929af30200401fd13956e541b5951",
+  "reviewer_identity": null,
+  "reviewed_commit": null,
+  "review_url": null,
+  "reviewed_at_utc": null,
+  "scope": {
+    "mathematics": "pending",
+    "source_correspondence": "pending",
+    "integer_safety": "pending",
+    "scope_and_downstream": "pending",
+    "provenance": "pending"
+  }
+}

@@ -15,6 +15,8 @@ jobs:
       - name: Python reference and vectors
         run: |
           python3 -m unittest discover -s verification -p 'test_release_controls.py'
+          python3 -m unittest discover -s verification -p 'test_p1_candidate.py'
+          python3 verification/p1/check_candidate.py --check
           python3 verification/p1/exp_q32_production.py
           python3 verification/generate_vectors.py --check
           cd tests && sha256sum --check vectors.sha256
@@ -37,3 +39,11 @@ jobs:
         env:
           MIRRA_WASM: ${{ github.workspace }}/target/wasm32-unknown-unknown/release/mirra_canister.wasm
         run: cargo test --manifest-path integration-tests/Cargo.toml --locked --test upgrade -- --nocapture
+      - name: Measure staged candidate
+        run: python3 verification/package_staged_candidate.py "$RUNNER_TEMP/mirra-candidate"
+      - name: Preserve staged candidate for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: mirra-p1-candidate-${{ github.sha }}
+          path: ${{ runner.temp }}/mirra-candidate/
+          if-no-files-found: error

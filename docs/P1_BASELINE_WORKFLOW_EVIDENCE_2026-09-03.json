@@ -1,0 +1,65 @@
+{
+  "observed_at_utc": "2026-09-03",
+  "merged_pr": 1,
+  "main_commit": "4ad47db0671cad3a151b4b77d6f2248f5ed84bdc",
+  "tested_and_merged_tree": "94049da5e6dcdd365760dd789d96a2c6a0d4923d",
+  "verification_basis": "GitHub run/job API plus direct full job logs; not merge message",
+  "records": [
+    {
+      "label": "pr",
+      "run_id": 33721380602,
+      "job_id": 100541054820,
+      "executed_commit": "03ae240dc3bf1a3ed537553dd81b0316ce9aa9b6",
+      "actual_log_excerpts": [
+        "2026-09-03T06:02:01.6250006Z Ran 5 tests in 0.072s",
+        "2026-09-03T06:02:02.6692931Z PASS: 99 vectors regenerate byte-for-byte",
+        "2026-09-03T06:02:18.2725287Z test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "2026-09-03T06:02:19.7288181Z test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.45s",
+        "2026-09-03T06:05:36.3480898Z PASS: vulnerabilities=0; reviewed advisory set exact through 2026-11-30",
+        "2026-09-03T06:07:58.0142606Z PASS: checked-in Candid exactly matches generated Wasm interface",
+        "2026-09-03T06:08:52.2253936Z MIRRA_RUNTIME_OK correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2",
+        "2026-09-03T06:08:52.2328197Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.93s"
+      ],
+      "conclusion": "success",
+      "log_sha256": "5625de57afe0252dc2181a23b66a160a060f41aca04173fb5968fa9e881105d7",
+      "url": "https://github.com/Mitosis50/MIRRA/actions/runs/33721380602/job/100541054820",
+      "decoded_log_utf8_bytes": 133891
+    },
+    {
+      "label": "runtime",
+      "run_id": 33721380788,
+      "job_id": 100541055243,
+      "executed_commit": "03ae240dc3bf1a3ed537553dd81b0316ce9aa9b6",
+      "actual_log_excerpts": [
+        "2026-09-03T06:02:50.2808311Z MIRRA_RUNTIME_OK correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2",
+        "2026-09-03T06:02:50.2873265Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.32s"
+      ],
+      "conclusion": "success",
+      "log_sha256": "4040cbf41d346ccbf957fe180f41c668e845de9c4559ebce8ed95f3bad10da8f",
+      "url": "https://github.com/Mitosis50/MIRRA/actions/runs/33721380788/job/100541055243",
+      "decoded_log_utf8_bytes": 58051
+    },
+    {
+      "label": "main",
+      "run_id": 33722093668,
+      "job_id": 100543167029,
+      "executed_commit": "4ad47db0671cad3a151b4b77d6f2248f5ed84bdc",
+      "actual_log_excerpts": [
+        "2026-09-03T06:11:39.8130222Z Ran 5 tests in 0.087s",
+        "2026-09-03T06:11:41.1689534Z PASS: 99 vectors regenerate byte-for-byte",
+        "2026-09-03T06:12:06.8402533Z test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "2026-09-03T06:12:08.6777444Z test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.84s",
+        "2026-09-03T06:16:25.5436036Z PASS: vulnerabilities=0; reviewed advisory set exact through 2026-11-30",
+        "2026-09-03T06:19:32.0264203Z PASS: checked-in Candid exactly matches generated Wasm interface",
+        "2026-09-03T06:20:41.1288291Z MIRRA_RUNTIME_OK correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2",
+        "2026-09-03T06:20:41.1378517Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.67s"
+      ],
+      "conclusion": "success",
+      "log_sha256": "af27f8f9f965b10bcfa12435f1fce1aedb1d84d7214515f78217ce9355542288",
+      "url": "https://github.com/Mitosis50/MIRRA/actions/runs/33722093668/job/100543167029",
+      "decoded_log_utf8_bytes": 132837
+    }
+  ],
+  "scope": "Baseline RC5 execution only. Does not verify future pin increments, mainnet or independent P1 acceptance.",
+  "other_failed_runs": "Open Dependabot PRs #2-#7 target distinct heads and are not these baseline verification runs."
+}

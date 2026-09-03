@@ -46,12 +46,19 @@ class ProofIntakeTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("SHA-256 mismatch", result.stderr)
 
-    def test_nonwithdrawn_hash_match_remains_only_a_byte_check(self):
+    def test_nonwithdrawn_hash_match_alone_cannot_approve_a_proof(self):
         # Synthetic data in an isolated fixture, never installed as release evidence.
         payload = b"unit test: not a mathematical proof"
         result = self.check_intake(hashlib.sha256(payload).hexdigest(), payload)
-        self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("certificate bytes match", result.stdout)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("proof checker is missing", result.stderr)
+
+    def test_withdrawn_bytes_remain_rejected_under_a_new_pin(self):
+        payload = (ROOT / "verification/p1/review/WITHDRAWN_p1_proof_artifact.json").read_bytes()
+        self.assertEqual(hashlib.sha256(payload).hexdigest(), WITHDRAWN)
+        result = self.check_intake("a" * 64, payload)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("supplied P1 proof is withdrawn", result.stderr)
 
 
 class BuildEnvironmentTests(unittest.TestCase):
