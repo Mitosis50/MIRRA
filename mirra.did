@@ -1,0 +1,128 @@
+type CertifiedSnapshot = record {
+  certificate : opt blob;
+  snapshot : PublicSnapshot;
+  snapshot_commitment : blob;
+};
+type CorrectionReceipt = record {
+  seq : nat64;
+  replayed : bool;
+  weights : vec nat64;
+  state_root : blob;
+  correction_id : blob;
+  payload_hash : blob;
+};
+type CorrectionRecord = record {
+  seq : nat64;
+  event_key : blob;
+  losses : vec ExpertLoss;
+  writer : principal;
+  metric_id : blob;
+  external_event_id : blob;
+  accepted_at_ns : nat64;
+  correction_id : blob;
+  payload_hash : blob;
+};
+type ExpertLoss = record { expert_id : blob; loss_q32 : nat64 };
+type ExpertRecord = record {
+  active : bool;
+  registered_at_ns : nat64;
+  owner : principal;
+  system_id : text;
+  version : text;
+  expert_id : blob;
+  metadata_hash : opt blob;
+};
+type GovernanceEvent = record {
+  seq : nat64;
+  action : text;
+  actor : principal;
+  subject : opt principal;
+  recorded_at_ns : nat64;
+  roles : opt nat8;
+};
+type Health = record {
+  seq : nat64;
+  active_set_locked : bool;
+  expert_count : nat64;
+  receipt_count : nat64;
+  schema_version : nat32;
+  active_expert_count : nat64;
+  correction_count : nat64;
+  governance_event_count : nat64;
+  writer_count : nat64;
+  governance : principal;
+  state_root : blob;
+  paused : bool;
+};
+type InitArgs = record { governance : opt principal };
+type ProtocolConstants = record {
+  p1_cert_sha256 : text;
+  eta_text : text;
+  contract : text;
+  loss_min_q32 : nat64;
+  idempotency_scope : text;
+  scale : text;
+  schema_version : nat32;
+  vector_sha256 : text;
+  b_q32 : int64;
+  loss_encoding : text;
+  expert_id_encoding : text;
+  loss_max_q32 : nat64;
+  k_max : nat32;
+  k_min : nat32;
+  eta_q32 : nat64;
+  floor_units : nat64;
+};
+type PublicSnapshot = record {
+  seq : nat64;
+  protocol : text;
+  p1_cert_sha256 : text;
+  protocol_fingerprint : blob;
+  expert_count : nat64;
+  schema_version : nat32;
+  vector_sha256 : text;
+  state_root : blob;
+};
+type Readout = record {
+  seq : nat64;
+  weights : vec nat64;
+  expert_ids : vec blob;
+  state_root : blob;
+};
+type RecordCorrectionRequest = record {
+  losses : vec ExpertLoss;
+  metric_id : blob;
+  external_event_id : blob;
+  expected_seq : opt nat64;
+};
+type RegisterExpertRequest = record {
+  owner : principal;
+  system_id : text;
+  version : text;
+  metadata_hash : opt blob;
+};
+type Result = variant { Ok : GovernanceEvent; Err : text };
+type Result_1 = variant { Ok : opt ExpertRecord; Err : text };
+type Result_2 = variant { Ok : Readout; Err : text };
+type Result_3 = variant { Ok : vec ExpertRecord; Err : text };
+type Result_4 = variant { Ok : CorrectionReceipt; Err : text };
+type Result_5 = variant { Ok : ExpertRecord; Err : text };
+service : (opt InitArgs) -> {
+  accept_governance : () -> (Result);
+  certified_snapshot : () -> (CertifiedSnapshot) query;
+  get_correction : (nat64) -> (opt CorrectionRecord) query;
+  get_expert : (blob) -> (Result_1) query;
+  get_governance_event : (nat64) -> (opt GovernanceEvent) query;
+  get_readout : () -> (Result_2) query;
+  get_writer_roles : (principal) -> (nat8) query;
+  health : () -> (Health) query;
+  list_experts : (opt blob, nat32) -> (Result_3) query;
+  propose_governance : (principal) -> (Result);
+  protocol_constants : () -> (ProtocolConstants) query;
+  public_snapshot : () -> (PublicSnapshot) query;
+  record_correction : (RecordCorrectionRequest) -> (Result_4);
+  register_expert : (RegisterExpertRequest) -> (Result_5);
+  set_expert_active : (blob, bool) -> (Result_5);
+  set_paused : (bool) -> (Result);
+  set_writer_roles : (principal, nat8) -> (Result);
+}

@@ -1,0 +1,21 @@
+{
+  "canisters": {
+    "mirra_canister": {
+      "type": "rust",
+      "candid": "mirra.did",
+      "package": "mirra_canister",
+      "target": "wasm32-unknown-unknown"
+    }
+  },
+  "defaults": {
+    "build": { "packtool": "" }
+  },
+  "dfx": "0.32.0",
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:4943",
+      "type": "ephemeral"
+    }
+  },
+  "version": 1
+}

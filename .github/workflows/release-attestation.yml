@@ -1,0 +1,64 @@
+name: MIRRA release attestation
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["mirra-v*"]
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject withdrawn P1 proof and check replacement byte identity
+        run: bash scripts/verify-p1-certificate.sh
+      - name: Install pinned verification tools
+        run: |
+          rustup show
+          cargo install cargo-audit --version 0.22.2 --locked
+          cargo install cargo-cyclonedx --version 0.5.9 --locked
+          cargo install candid-extractor --version 0.1.6 --locked
+      - name: Install hash-pinned dfx and PocketIC server
+        run: |
+          curl --fail --location --silent --show-error \
+            https://github.com/dfinity/sdk/releases/download/0.32.0/dfx-x86_64-unknown-linux-gnu.tar.gz \
+            --output /tmp/dfx.tar.gz
+          echo '04229af24ebb7e30bf3a2dba5d69240849338da148f6bf1d56c8a48daaa2dbe3  /tmp/dfx.tar.gz' | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/dfx"
+          tar -xzf /tmp/dfx.tar.gz -C "$RUNNER_TEMP/dfx"
+          echo "$RUNNER_TEMP/dfx/dfx-x86_64-unknown-linux-gnu" >> "$GITHUB_PATH"
+          curl --fail --location --silent --show-error \
+            https://github.com/dfinity/pocketic/releases/download/15.0.0/pocket-ic-x86_64-linux.gz \
+            --output /tmp/pocket-ic.gz
+          gzip --decompress /tmp/pocket-ic.gz
+          echo '29472ea4433b30a280676c4e22e369d79d5ba6ee1b4d48bab32ebe7d0ad2b4bb  /tmp/pocket-ic' | sha256sum --check
+          chmod +x /tmp/pocket-ic
+      - name: Run release verification
+        env:
+          CANDID_EXTRACTOR: candid-extractor
+          DFX: dfx
+          POCKET_IC_BIN: /tmp/pocket-ic
+        run: bash scripts/verify-release.sh
+      - name: Stage attested Wasm
+        run: |
+          mkdir -p release
+          cp target-verification/wasm32-unknown-unknown/release/mirra_canister.wasm release/
+          sha256sum release/mirra_canister.wasm > release/SHA256SUMS
+      - name: Attest Wasm provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: release/mirra_canister.wasm
+      - name: Attest production SBOM
+        uses: actions/attest@v4
+        with:
+          subject-path: release/mirra_canister.wasm
+          sbom-path: security/mirra-canister.cdx.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mirra-release-${{ github.sha }}
+          path: release/
