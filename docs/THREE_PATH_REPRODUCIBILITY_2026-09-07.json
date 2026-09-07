@@ -1,0 +1,142 @@
+{
+  "schema": "mirra.p1.three-path-reproducibility.v1",
+  "status": "PASSED_EVIDENCE_RECORDED_NOT_RELEASE_ATTESTATION",
+  "gate": "three_path_reproducibility",
+  "decision": "passed",
+  "observed_at_utc": "2026-09-07",
+  "recorded_at_utc": "2026-09-07T23:55:48Z",
+  "recorded_at_pt": "2026-09-07T16:55:48-0700",
+  "tip_commit": "159d41bf75e3543893396f67135e53e31c9d3f08",
+  "tip_tree": "ee002b307e0f5b9f24cbe36fcc78e318d430ca9f",
+  "reviewed_source_baseline": {
+    "commit": "b8c56a1744b53aa9dae656bee17bc09fc717733e",
+    "tree": "1d7bf27932859b42e2fad1736ea1bf47490d7e80",
+    "executable_source_continuity": "evidence_checksum_review_provenance_manifest_only",
+    "source_proof_checker_cargo_build_script_candid_wasm_unchanged": true,
+    "note": "Tip 159d41bf rebuilds produce the same Wasm bytes as the reviewed executable subject bound at b8c56a1."
+  },
+  "expected_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+  "byte_identical_across_paths": true,
+  "paths": {
+    "A": {
+      "label": "GitHub Actions successful verification build artifact",
+      "environment": {
+        "kind": "github_actions",
+        "workflow": "MIRRA verification",
+        "run_id": 34170383195,
+        "run_url": "https://github.com/Mitosis50/MIRRA/actions/runs/34170383195",
+        "job_id": 101889410002,
+        "artifact_id": 10035602693,
+        "artifact_name": "mirra-p1-candidate-0c69388e024c8d13cd154be1b0fbbf5061ccd258",
+        "rustc": "rustc 1.88.0 (6b00bc388 2025-06-23)",
+        "os": "GitHub-hosted Linux (Actions runner; rust-toolchain.toml 1.88.0)"
+      },
+      "commands": [
+        "mkdir -p /workspace/mirra-repro/path-a",
+        "curl -sL -o /workspace/mirra-repro/path-a/artifact.zip 'https://nightly.link/Mitosis50/MIRRA/actions/runs/34170383195/mirra-p1-candidate-0c69388e024c8d13cd154be1b0fbbf5061ccd258.zip'",
+        "unzip -o /workspace/mirra-repro/path-a/artifact.zip -d /workspace/mirra-repro/path-a/extracted",
+        "sha256sum /workspace/mirra-repro/path-a/extracted/mirra_canister.wasm",
+        "cp -a extracted/mirra_canister.wasm ./mirra_canister.wasm",
+        "# Mac (machineId 8f5619b6-6eaf-4da5-b552-2a582cb7c713) for metadata/logs: gh api repos/Mitosis50/MIRRA/actions/runs/34170383195 and gh run view --log"
+      ],
+      "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "match_expected": true,
+      "notes": [
+        "BUILD_RECORD.source_commit 0c69388e024c8d13cd154be1b0fbbf5061ccd258 is staged candidate pin; tip head_sha is 159d41bf\u2026; tip rebuilds match artifact bytes."
+      ]
+    },
+    "B": {
+      "label": "Grok clean Linux checkout/build",
+      "environment": {
+        "kind": "clean_linux_host",
+        "os": "Debian GNU/Linux 13 (trixie)",
+        "uname": "Linux cursor 6.12.94+ #1 SMP PREEMPT_DYNAMIC Fri Sep  4 21:11:44 UTC 2026 x86_64 GNU/Linux",
+        "rustc": "rustc 1.88.0 (6b00bc388 2025-06-23)",
+        "cargo": "cargo 1.88.0 (873a06493 2025-05-10)",
+        "CARGO_TARGET_DIR": "/workspace/mirra-repro/path-b/target-fresh",
+        "sccache": "unset / not used",
+        "fresh_clone": true,
+        "reused_target_dir": false
+      },
+      "commands": [
+        "mkdir -p /workspace/mirra-repro/path-b",
+        "cd /workspace/mirra-repro/path-b && git clone https://github.com/Mitosis50/MIRRA.git src",
+        "cd src && git checkout 159d41bf75e3543893396f67135e53e31c9d3f08",
+        "git rev-parse HEAD  # -> 159d41bf75e3543893396f67135e53e31c9d3f08",
+        "git rev-parse HEAD^{tree}  # -> ee002b307e0f5b9f24cbe36fcc78e318d430ca9f",
+        "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain none",
+        "source \"$HOME/.cargo/env\"",
+        "rustup toolchain install 1.88.0 --profile minimal --component clippy,rustfmt",
+        "rustup target add wasm32-unknown-unknown --toolchain 1.88.0",
+        "rustup override set 1.88.0",
+        "unset RUSTC_WRAPPER SCCACHE_DIR SCCACHE CARGO_INCREMENTAL",
+        "export CARGO_TARGET_DIR=/workspace/mirra-repro/path-b/target-fresh",
+        "rm -rf \"$CARGO_TARGET_DIR\" && mkdir -p \"$CARGO_TARGET_DIR\"",
+        "export RUSTUP_TOOLCHAIN=1.88.0",
+        "bash scripts/build-wasm.sh",
+        "sha256sum \"$CARGO_TARGET_DIR/wasm32-unknown-unknown/release/mirra_canister.wasm\"",
+        "cp -a \"$CARGO_TARGET_DIR/wasm32-unknown-unknown/release/mirra_canister.wasm\" /workspace/mirra-repro/path-b/mirra_canister.wasm"
+      ],
+      "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "match_expected": true
+    },
+    "C": {
+      "label": "Fresh pinned Rust 1.88 separate clean host env",
+      "environment": {
+        "kind": "fully_separate_clean_host_env",
+        "requested_docker_image": "rust:1.88.0-bookworm",
+        "docker_used": false,
+        "docker_fallback_reason": "docker.io install blocked in sandbox (already inside container; no docker.sock). Fell back to fully separate clean host env as allowed by Path C requirements.",
+        "os": "Debian GNU/Linux 13 (trixie)",
+        "uname": "Linux cursor 6.12.94+ #1 SMP PREEMPT_DYNAMIC Fri Sep  4 21:11:44 UTC 2026 x86_64 GNU/Linux",
+        "rustc": "rustc 1.88.0 (6b00bc388 2025-06-23)",
+        "cargo": "cargo 1.88.0 (873a06493 2025-05-10)",
+        "CARGO_HOME": "/workspace/mirra-repro/path-c/env/cargo-home",
+        "CARGO_TARGET_DIR": "/workspace/mirra-repro/path-c/env/target",
+        "CARGO_INCREMENTAL": "0",
+        "locked": true,
+        "build_script": "scripts/build-wasm.sh --locked"
+      },
+      "commands": [
+        "git clone https://github.com/Mitosis50/MIRRA.git && git checkout 159d41bf75e3543893396f67135e53e31c9d3f08",
+        "export CARGO_HOME=/workspace/mirra-repro/path-c/env/cargo-home",
+        "export CARGO_TARGET_DIR=/workspace/mirra-repro/path-c/env/target",
+        "export CARGO_INCREMENTAL=0",
+        "bash scripts/build-wasm.sh --locked",
+        "python3 verification/p1/check_candidate.py --check",
+        "scripts/verify-candid.sh",
+        "verification/generate_vectors.py --check && sha256sum -c tests/vectors.sha256",
+        "scripts/verify-runtime.sh <wasm> 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba"
+      ],
+      "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "match_expected": true,
+      "extra_checks": {
+        "certificate_checker": true,
+        "candid_equality": true,
+        "vectors_99": true,
+        "runtime_upgrade_witness": true,
+        "runtime_observation": "MIRRA_RUNTIME_OK correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2"
+      }
+    }
+  },
+  "fidelity_review": {
+    "decision": "pass",
+    "reviewer_identity": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
+    "reviewed_at_utc": "2026-09-07T23:52:07Z",
+    "byte_identical_A_B_C": true,
+    "caveats": [
+      "Path C Docker image unavailable; allowed separate clean host env fallback",
+      "Path A BUILD_RECORD.source_commit 0c69388e diverges from tip 159d41bf; tip rebuilds match artifact bytes"
+    ]
+  },
+  "policy": {
+    "scope_provenance": "needs-work",
+    "overall": "needs-work",
+    "three_path_reproducibility": "passed",
+    "mainnet_trusted_root_verification": "open",
+    "release_attestation": "open",
+    "pr8_merge_cleared": false,
+    "no_source_proof_checker_cargo_build_script_candid_wasm_changes_in_this_commit": true
+  },
+  "scope_note": "Records three-path Wasm reproducibility as passed. Does not flip REVIEW.json provenance or overall; does not claim mainnet verification or release attestation."
+}
