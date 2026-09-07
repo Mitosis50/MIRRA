@@ -5,16 +5,28 @@
   "checker_sha256": "5fa62f9a54d4d06755c256e52d78e007b59929af30200401fd13956e541b5951",
   "reviewer_identity": "MIRRA Reviewer (Grok Bot) 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
   "reviewed_commit": "b8c56a1744b53aa9dae656bee17bc09fc717733e",
-  "review_url": null,
+  "review_url": "https://github.com/Mitosis50/MIRRA/pull/10#pullrequestreview-5135558028",
   "reviewed_at_utc": "2026-09-06T14:24:11Z",
   "scope": {
     "mathematics": "accepted",
-    "source_correspondence": "needs-work",
+    "source_correspondence": "accepted",
     "integer_safety": "accepted",
     "scope_and_downstream": "accepted",
     "provenance": "needs-work"
   },
   "overall": "needs-work",
   "math_bound_outward": "0.500000043",
-  "notes": "Mathematics of staged absolute-error candidate accepted; release intake blocked on compiled correspondence, CI Wasm provenance, and human REVIEW.json reconciliation."
+  "notes": "Mathematics of staged absolute-error candidate accepted; release intake blocked on compiled correspondence, CI Wasm provenance, and human REVIEW.json reconciliation. Compiled correspondence accepted via formal APPROVE https://github.com/Mitosis50/MIRRA/pull/10#pullrequestreview-5135558028 (rjc-chief-of-staff[bot], 2026-09-07T22:33:23Z). Provenance/overall remain needs-work pending remaining release gates.",
+  "compiled_correspondence_review": {
+    "schema": "mirra.p1.compiled-correspondence-review.v1",
+    "decision": "accepted",
+    "reviewer_identity": "rjc-chief-of-staff[bot]",
+    "github_review_id": 5135558028,
+    "github_review_url": "https://github.com/Mitosis50/MIRRA/pull/10#pullrequestreview-5135558028",
+    "submitted_at_utc": "2026-09-07T22:33:23Z",
+    "reviewed_source_commit": "b8c56a1744b53aa9dae656bee17bc09fc717733e",
+    "reviewed_source_tree": "1d7bf27932859b42e2fad1736ea1bf47490d7e80",
+    "reviewed_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+    "pr_head_at_approval": "fa1b11dd3db9396fc8cb2e69c1837977103e19a5"
+  }
 }
