@@ -1,17 +1,20 @@
 {
   "schema": "mirra.p1.review-decision.v1",
-  "decision": "pending",
+  "decision": "needs-work",
   "proof_sha256": "37f218d3fb9695dbc62cd60955337067b6e55fa45a4d8c0a93ef8415278a3a2d",
   "checker_sha256": "5fa62f9a54d4d06755c256e52d78e007b59929af30200401fd13956e541b5951",
-  "reviewer_identity": null,
-  "reviewed_commit": null,
+  "reviewer_identity": "MIRRA Reviewer (Grok Bot) 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
+  "reviewed_commit": "b8c56a1744b53aa9dae656bee17bc09fc717733e",
   "review_url": null,
-  "reviewed_at_utc": null,
+  "reviewed_at_utc": "2026-09-06T14:24:11Z",
   "scope": {
-    "mathematics": "pending",
-    "source_correspondence": "pending",
-    "integer_safety": "pending",
-    "scope_and_downstream": "pending",
-    "provenance": "pending"
-  }
+    "mathematics": "accepted",
+    "source_correspondence": "needs-work",
+    "integer_safety": "accepted",
+    "scope_and_downstream": "accepted",
+    "provenance": "needs-work"
+  },
+  "overall": "needs-work",
+  "math_bound_outward": "0.500000043",
+  "notes": "Mathematics of staged absolute-error candidate accepted; release intake blocked on compiled correspondence, CI Wasm provenance, and human REVIEW.json reconciliation."
 }
