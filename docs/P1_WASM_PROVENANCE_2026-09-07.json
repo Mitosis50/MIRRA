@@ -1,0 +1,84 @@
+{
+  "schema": "mirra.p1.wasm-provenance.v1",
+  "observed_at_utc": "2026-09-07",
+  "status": "EVIDENCE_RECORDED_NOT_RELEASE_ATTESTATION",
+  "review_subject": {
+    "commit": "b8c56a1744b53aa9dae656bee17bc09fc717733e",
+    "tree": "1d7bf27932859b42e2fad1736ea1bf47490d7e80",
+    "proof_sha256": "37f218d3fb9695dbc62cd60955337067b6e55fa45a4d8c0a93ef8415278a3a2d",
+    "checker_sha256": "5fa62f9a54d4d06755c256e52d78e007b59929af30200401fd13956e541b5951"
+  },
+  "ci_checkout": {
+    "merge_commit": "82bda8ac5f2cf328ca54d1ea4086311e4fc4d27d",
+    "tree": "1d7bf27932859b42e2fad1736ea1bf47490d7e80",
+    "parents": [
+      "4ad47db0671cad3a151b4b77d6f2248f5ed84bdc",
+      "b8c56a1744b53aa9dae656bee17bc09fc717733e"
+    ],
+    "relationship_to_review_subject": {
+      "compare_url": "https://github.com/Mitosis50/MIRRA/compare/b8c56a1744b53aa9dae656bee17bc09fc717733e...82bda8ac5f2cf328ca54d1ea4086311e4fc4d27d",
+      "ahead_by": 1,
+      "behind_by": 0,
+      "changed_files": 0,
+      "same_tree": true
+    }
+  },
+  "verification_workflow": {
+    "run_id": 33723910513,
+    "job_id": 100548609991,
+    "url": "https://github.com/Mitosis50/MIRRA/actions/runs/33723910513",
+    "head_sha": "b8c56a1744b53aa9dae656bee17bc09fc717733e",
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "actual_log_evidence": [
+      "PASS: 99 vectors regenerate byte-for-byte",
+      "PASS: vulnerabilities=0; reviewed advisory set exact through 2026-11-30",
+      "PASS: checked-in Candid exactly matches generated Wasm interface",
+      "MIRRA_RUNTIME_OK correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2",
+      "mirra_canister.wasm sha256=2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba"
+    ]
+  },
+  "runtime_workflow": {
+    "run_id": 33723910558,
+    "job_id": 100548610042,
+    "url": "https://github.com/Mitosis50/MIRRA/actions/runs/33723910558",
+    "head_sha": "b8c56a1744b53aa9dae656bee17bc09fc717733e",
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "actual_log_evidence": [
+      "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba  target/wasm32-unknown-unknown/release/mirra_canister.wasm",
+      "MIRRA_RUNTIME_OK correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2"
+    ]
+  },
+  "artifact": {
+    "id": 9881447880,
+    "name": "mirra-p1-candidate-82bda8ac5f2cf328ca54d1ea4086311e4fc4d27d",
+    "archive_sha256": "1d367a3de9e9d6cea0db5f17415dd6d60328a422b3ee4147fa2cb31402846e6a",
+    "size_bytes": 316361,
+    "created_at": "2026-09-03T06:43:18Z",
+    "expires_at": "2026-12-02T06:35:17Z",
+    "build_record": {
+      "source_commit": "82bda8ac5f2cf328ca54d1ea4086311e4fc4d27d",
+      "source_tree": "1d7bf27932859b42e2fad1736ea1bf47490d7e80",
+      "rustc": "rustc 1.88.0 (6b00bc388 2025-06-23)"
+    },
+    "files": {
+      "mirra_canister.wasm": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "mirra.did": "b9f031d8dc354d93935b1bc29001b875a3616cc55a7dfc95ec3ccae6250765f8",
+      "MIRRA_P1_CERTIFICATE.bin": "37f218d3fb9695dbc62cd60955337067b6e55fa45a4d8c0a93ef8415278a3a2d"
+    },
+    "independent_download_and_sha256sums_check": "passed"
+  },
+  "release_gates": {
+    "grok_review_decision": "needs-work",
+    "independent_p1_acceptance": false,
+    "compiled_correspondence_re_review_required": true,
+    "three_clean_path_reproducibility": "pending",
+    "rc5_to_new_pin_upgrade": "pending",
+    "mainnet_trusted_root_verification": "not_performed",
+    "release_attestation": "not_issued"
+  },
+  "scope_note": "This record binds the reviewed source tree, CI checkout, workflow logs and downloaded candidate artifact. It is provenance evidence, not independent acceptance or a production release attestation."
+}
