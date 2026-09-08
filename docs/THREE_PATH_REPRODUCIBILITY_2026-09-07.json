@@ -1,11 +1,11 @@
 {
   "schema": "mirra.p1.three-path-reproducibility.v1",
-  "status": "PASSED_EVIDENCE_RECORDED_NOT_RELEASE_ATTESTATION",
+  "status": "NEEDS_WORK_PENDING_GENUINE_THIRD_HOST",
   "gate": "three_path_reproducibility",
-  "decision": "passed",
+  "decision": "needs-work",
   "observed_at_utc": "2026-09-07",
-  "recorded_at_utc": "2026-09-07T23:55:48Z",
-  "recorded_at_pt": "2026-09-07T16:55:48-0700",
+  "recorded_at_utc": "2026-09-08T04:44:42Z",
+  "recorded_at_pt": "2026-09-07T21:44:42-0700",
   "tip_commit": "159d41bf75e3543893396f67135e53e31c9d3f08",
   "tip_tree": "ee002b307e0f5b9f24cbe36fcc78e318d430ca9f",
   "reviewed_source_baseline": {
@@ -16,7 +16,7 @@
     "note": "Tip 159d41bf rebuilds produce the same Wasm bytes as the reviewed executable subject bound at b8c56a1."
   },
   "expected_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
-  "byte_identical_across_paths": true,
+  "byte_identical_across_paths": false,
   "paths": {
     "A": {
       "label": "GitHub Actions successful verification build artifact",
@@ -95,7 +95,10 @@
         "CARGO_TARGET_DIR": "/workspace/mirra-repro/path-c/env/target",
         "CARGO_INCREMENTAL": "0",
         "locked": true,
-        "build_script": "scripts/build-wasm.sh --locked"
+        "build_script": "scripts/build-wasm.sh --locked",
+        "independent_of_path_b": false,
+        "same_host_as_path_b": true,
+        "rejection": "Not a genuine third environment. Same Debian host and kernel as Path B. Isolated CARGO_HOME/CARGO_TARGET_DIR do not create a separate host."
       },
       "commands": [
         "git clone https://github.com/Mitosis50/MIRRA.git && git checkout 159d41bf75e3543893396f67135e53e31c9d3f08",
@@ -116,27 +119,48 @@
         "vectors_99": true,
         "runtime_upgrade_witness": true,
         "runtime_observation": "MIRRA_RUNTIME_OK correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2"
-      }
+      },
+      "qualifies_as_independent_third_environment": false,
+      "withdrawn_as_third_path": true,
+      "withdrawal_reason": "Prior Path C labeled fully_separate_clean_host_env was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild."
     }
   },
   "fidelity_review": {
-    "decision": "pass",
+    "decision": "needs-work",
     "reviewer_identity": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
     "reviewed_at_utc": "2026-09-07T23:52:07Z",
-    "byte_identical_A_B_C": true,
+    "byte_identical_A_B_C": false,
     "caveats": [
-      "Path C Docker image unavailable; allowed separate clean host env fallback",
-      "Path A BUILD_RECORD.source_commit 0c69388e diverges from tip 159d41bf; tip rebuilds match artifact bytes"
-    ]
+      "Prior Path C labeled fully_separate_clean_host_env was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild.",
+      "Path A BUILD_RECORD.source_commit 0c69388e diverges from evidence tip 159d41bf; A and B rebuilds match expected Wasm bytes.",
+      "This correction does not claim mainnet trusted-root verification or release attestation, and does not clear PR #8 to merge."
+    ],
+    "corrected_at_utc": "2026-09-08T04:44:42Z",
+    "note": "Prior fidelity PASS withdrawn. A and B hashes matched the expected Wasm, and the withdrawn Path C process emitted the same bytes, but Path C was not an independent host. Three-path reproducibility is not established."
   },
   "policy": {
     "scope_provenance": "needs-work",
     "overall": "needs-work",
-    "three_path_reproducibility": "passed",
+    "three_path_reproducibility": "needs-work",
     "mainnet_trusted_root_verification": "open",
     "release_attestation": "open",
     "pr8_merge_cleared": false,
     "no_source_proof_checker_cargo_build_script_candid_wasm_changes_in_this_commit": true
   },
-  "scope_note": "Records three-path Wasm reproducibility as passed. Does not flip REVIEW.json provenance or overall; does not claim mainnet verification or release attestation."
+  "scope_note": "Retracts the three-path reproducibility pass. Prior Path C was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild. Does not flip REVIEW.json provenance or overall; does not claim mainnet verification or release attestation; does not clear PR #8 to merge.",
+  "correction": {
+    "decision": "needs-work",
+    "corrected_at_utc": "2026-09-08T04:44:42Z",
+    "corrected_at_pt": "2026-09-07T21:44:42-0700",
+    "supersedes_decision": "passed",
+    "supersedes_recorded_at_utc": "2026-09-07T23:55:48Z",
+    "reason": "Prior Path C labeled fully_separate_clean_host_env was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild.",
+    "path_c_prior_label": "fully_separate_clean_host_env",
+    "path_c_prior_host": "Debian GNU/Linux 13 (trixie); Linux cursor 6.12.94+ x86_64 \u2014 same host/kernel as Path B",
+    "what_does_not_count": "separate CARGO_HOME and CARGO_TARGET_DIR on the same host",
+    "path_c_status": "pending_m1_mac_or_pinned_container_rebuild",
+    "mainnet_trusted_root_verification": "open",
+    "release_attestation": "open",
+    "pr8_merge_cleared": false
+  }
 }

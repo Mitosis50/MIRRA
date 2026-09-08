@@ -16,7 +16,7 @@
   },
   "overall": "needs-work",
   "math_bound_outward": "0.500000043",
-  "notes": "Mathematics of staged absolute-error candidate accepted; release intake blocked on compiled correspondence, CI Wasm provenance, and human REVIEW.json reconciliation. Compiled correspondence accepted via formal APPROVE https://github.com/Mitosis50/MIRRA/pull/10#pullrequestreview-5135558028 (rjc-chief-of-staff[bot], 2026-09-07T22:33:23Z). Provenance/overall remain needs-work pending remaining release gates. Three-path reproducibility passed 2026-09-07 on tip 159d41bf (docs/THREE_PATH_REPRODUCIBILITY_2026-09-07.json); provenance/overall remain needs-work; mainnet and attestation remain open.",
+  "notes": "Mathematics of staged absolute-error candidate accepted; release intake blocked on compiled correspondence, CI Wasm provenance, and human REVIEW.json reconciliation. Compiled correspondence accepted via formal APPROVE https://github.com/Mitosis50/MIRRA/pull/10#pullrequestreview-5135558028 (rjc-chief-of-staff[bot], 2026-09-07T22:33:23Z). Provenance/overall remain needs-work pending remaining release gates. Three-path reproducibility is needs-work, not passed: prior Path C labeled fully_separate_clean_host_env was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild. See docs/THREE_PATH_REPRODUCIBILITY_2026-09-07.json. Mainnet and attestation remain open. PR #8 is not merge-cleared.",
   "compiled_correspondence_review": {
     "schema": "mirra.p1.compiled-correspondence-review.v1",
     "decision": "accepted",
@@ -31,20 +31,23 @@
   },
   "three_path_reproducibility": {
     "schema": "mirra.p1.three-path-reproducibility-gate.v1",
-    "decision": "passed",
+    "decision": "needs-work",
     "tip_commit": "159d41bf75e3543893396f67135e53e31c9d3f08",
     "tip_tree": "ee002b307e0f5b9f24cbe36fcc78e318d430ca9f",
     "reviewed_source_baseline": "b8c56a1744b53aa9dae656bee17bc09fc717733e",
     "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
     "byte_identical_paths": [
       "A",
-      "B",
-      "C"
+      "B"
     ],
     "evidence_doc": "docs/THREE_PATH_REPRODUCIBILITY_2026-09-07.json",
     "fidelity_reviewer": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
     "recorded_at_utc": "2026-09-07T23:55:48Z",
     "mainnet": "open",
-    "attestation": "open"
+    "attestation": "open",
+    "corrected_at_utc": "2026-09-08T04:44:42Z",
+    "reason": "Prior Path C labeled fully_separate_clean_host_env was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild.",
+    "path_c_status": "pending_m1_mac_or_pinned_container_rebuild",
+    "independent_third_path": false
   }
 }
