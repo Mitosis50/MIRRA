@@ -16,7 +16,7 @@
   },
   "overall": "needs-work",
   "math_bound_outward": "0.500000043",
-  "notes": "Mathematics of staged absolute-error candidate accepted; release intake blocked on compiled correspondence, CI Wasm provenance, and human REVIEW.json reconciliation. Compiled correspondence accepted via formal APPROVE https://github.com/Mitosis50/MIRRA/pull/10#pullrequestreview-5135558028 (rjc-chief-of-staff[bot], 2026-09-07T22:33:23Z). Provenance/overall remain needs-work pending remaining release gates. three_path_reproducibility.decision remains needs-work and is not passed. Path C-native-M1 MISMATCH permanently retained (environment_label native_m1_mac not deleted or relabeled): hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896, Darwin arm64 / macOS 26.4.1, rustc 1.88.0 aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b. Path D-container-linux-amd64 MATCH, byte-identical, expected/observed SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba, size 878189, source commit b8c56a1744b53aa9dae656bee17bc09fc717733e, tree 1d7bf27932859b42e2fad1736ea1bf47490d7e80, image rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0, platform linux/amd64, rustc host x86_64-unknown-linux-gnu. Independent re-hash MATCH by MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. passed is blocked until new-tip verification and runtime logs are verified. Prior same-Debian Path C labeled fully_separate_clean_host_env remains withdrawn as not an independent environment. See docs/THREE_PATH_REPRODUCIBILITY_2026-09-07.json. This commit is docs/REVIEW/manifest only. Mainnet and attestation remain open. PR #8 is not merge-cleared.",
+  "notes": "Mathematics of staged absolute-error candidate accepted; release intake blocked on compiled correspondence, CI Wasm provenance, and human REVIEW.json reconciliation. Compiled correspondence accepted via formal APPROVE https://github.com/Mitosis50/MIRRA/pull/10#pullrequestreview-5135558028 (rjc-chief-of-staff[bot], 2026-09-07T22:33:23Z). Provenance/overall remain needs-work pending remaining release gates. three_path_reproducibility.decision is passed after verified new-tip logs; this does not change scope.provenance or overall. Log evidence: runtime 34190345146 success (headSha 088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3, RUNTIME_WASM_SHA256=2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba, MIRRA_RUNTIME_OK correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2); verification PR 34190345145 success (same wasm hash, P1 pin 37f218d3fb9695dbc62cd60955337067b6e55fa45a4d8c0a93ef8415278a3a2d, Candid PASS, 99 vectors PASS); verification push 34190343063 success (source_commit 088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3, same wasm hash). Path C-native-M1 MISMATCH permanently retained (environment_label native_m1_mac not deleted or relabeled): hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896, Darwin arm64 / macOS 26.4.1, rustc 1.88.0 aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b. Path D-container-linux-amd64 MATCH, byte-identical, expected/observed SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba, size 878189, source commit b8c56a1744b53aa9dae656bee17bc09fc717733e, tree 1d7bf27932859b42e2fad1736ea1bf47490d7e80, image rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0, platform linux/amd64, rustc host x86_64-unknown-linux-gnu. Independent re-hash MATCH by MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. Prior same-Debian Path C labeled fully_separate_clean_host_env remains withdrawn as not an independent environment. See docs/THREE_PATH_REPRODUCIBILITY_2026-09-07.json. This commit is docs/REVIEW/manifest only. Mainnet and attestation remain open. PR #8 is not merge-cleared.",
   "compiled_correspondence_review": {
     "schema": "mirra.p1.compiled-correspondence-review.v1",
     "decision": "accepted",
@@ -31,7 +31,7 @@
   },
   "three_path_reproducibility": {
     "schema": "mirra.p1.three-path-reproducibility-gate.v1",
-    "decision": "needs-work",
+    "decision": "passed",
     "tip_commit": "159d41bf75e3543893396f67135e53e31c9d3f08",
     "tip_tree": "ee002b307e0f5b9f24cbe36fcc78e318d430ca9f",
     "reviewed_source_baseline": "b8c56a1744b53aa9dae656bee17bc09fc717733e",
@@ -46,7 +46,7 @@
     "mainnet": "open",
     "attestation": "open",
     "corrected_at_utc": "2026-09-08T04:44:42Z",
-    "reason": "Path C-native-M1 MISMATCH permanently retained: hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896, Darwin arm64 / macOS 26.4.1, rustc 1.88.0 aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b. Do not delete or relabel. Path D-container-linux-amd64 MATCH, byte-identical, expected/observed SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba, size 878189, source commit b8c56a1744b53aa9dae656bee17bc09fc717733e, tree 1d7bf27932859b42e2fad1736ea1bf47490d7e80, image rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0, platform linux/amd64, rustc host x86_64-unknown-linux-gnu. Independent re-hash MATCH by MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. passed is blocked until new-tip verification and runtime logs are verified. three_path_reproducibility remains needs-work, not passed.",
+    "reason": "three_path_reproducibility.decision is passed after verified new-tip logs on 088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3. Runtime 34190345146 success, headSha 088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3, RUNTIME_WASM_SHA256=2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba, MIRRA_RUNTIME_OK correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2. Verification PR 34190345145 success, same wasm hash, P1 pin 37f218d3fb9695dbc62cd60955337067b6e55fa45a4d8c0a93ef8415278a3a2d, Candid PASS, 99 vectors PASS. Verification push 34190343063 success, source_commit 088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3, same wasm hash. Path C-native-M1 MISMATCH permanently retained and not deleted: hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes. Path D-container-linux-amd64 MATCH retained: sha256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba, 878189 bytes, digest sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0, platform linux/amd64, source b8c56a1744b53aa9dae656bee17bc09fc717733e, reviewer MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. scope.provenance remains needs-work. overall remains needs-work. Mainnet and attestation remain open. Not a merge.",
     "path_c_status": "Path_C-native-M1_permanent_mismatch_retained",
     "independent_third_path": false,
     "paths_a_b_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
@@ -117,9 +117,72 @@
         "docker run --name mirra-path-c-amd64-run --platform linux/amd64 -v /Users/aiagents/mirra-path-c-amd64/src:/src:ro -e CARGO_HOME=/tmp/cargo-home -e CARGO_TARGET_DIR=/tmp/target -e CARGO_INCREMENTAL=0 -w /src rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0 bash scripts/build-wasm.sh"
       ],
       "does_not_replace_path_c_native_m1": true,
-      "does_not_set_three_path_passed": true
+      "does_not_set_three_path_passed": true,
+      "current_three_path_decision_after_verified_logs": "passed"
     },
-    "passed_blocked_until": "new-tip verification and runtime logs are verified",
-    "cited_path_d_at_utc": "2026-09-08T05:21:19Z"
+    "passed_blocked_until": null,
+    "cited_path_d_at_utc": "2026-09-08T05:21:19Z",
+    "passed_blocked": false,
+    "previously_blocked_until": "new-tip verification and runtime logs are verified",
+    "passed_recorded_at_utc": "2026-09-08T05:38:18Z",
+    "passed_recorded_at_pt": "2026-09-07T22:38:18-0700",
+    "verified_logs_tip_commit": "088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3",
+    "log_evidence": {
+      "schema": "mirra.p1.three-path-log-unblock.v1",
+      "unblocks": "three_path_reproducibility.decision",
+      "decision": "passed",
+      "does_not_change": [
+        "scope.provenance",
+        "overall",
+        "mainnet_trusted_root_verification",
+        "release_attestation",
+        "pr8_merge"
+      ],
+      "verified_tip_commit": "088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3",
+      "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "recorded_at_utc": "2026-09-08T05:38:18Z",
+      "recorded_at_pt": "2026-09-07T22:38:18-0700",
+      "note": "User authorized this status update only after verification and runtime logs passed. These three workflow runs are the log evidence that unblocked three_path_reproducibility.decision=passed. Path C-native-M1 MISMATCH is permanently retained and not deleted. Path D-container-linux-amd64 MATCH is retained. This is not a mainnet claim, not a release attestation, and not a merge.",
+      "runs": [
+        {
+          "role": "runtime",
+          "name": "MIRRA runtime evidence",
+          "workflow": ".github/workflows/runtime-evidence.yml",
+          "event": "pull_request",
+          "run_id": 34190345146,
+          "url": "https://github.com/Mitosis50/MIRRA/actions/runs/34190345146",
+          "conclusion": "success",
+          "head_sha": "088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3",
+          "RUNTIME_WASM_SHA256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+          "MIRRA_RUNTIME_OK": "correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2"
+        },
+        {
+          "role": "verification_pr",
+          "name": "MIRRA verification",
+          "workflow": ".github/workflows/ci.yml",
+          "event": "pull_request",
+          "run_id": 34190345145,
+          "url": "https://github.com/Mitosis50/MIRRA/actions/runs/34190345145",
+          "conclusion": "success",
+          "head_sha": "088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3",
+          "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+          "p1_pin": "37f218d3fb9695dbc62cd60955337067b6e55fa45a4d8c0a93ef8415278a3a2d",
+          "candid": "PASS",
+          "vectors": "99 PASS"
+        },
+        {
+          "role": "verification_push",
+          "name": "MIRRA verification",
+          "workflow": ".github/workflows/ci.yml",
+          "event": "push",
+          "run_id": 34190343063,
+          "url": "https://github.com/Mitosis50/MIRRA/actions/runs/34190343063",
+          "conclusion": "success",
+          "head_sha": "088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3",
+          "source_commit": "088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3",
+          "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba"
+        }
+      ]
+    }
   }
 }

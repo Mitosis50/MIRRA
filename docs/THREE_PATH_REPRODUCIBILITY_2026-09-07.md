@@ -1,8 +1,8 @@
 # MIRRA three-path reproducibility — 2026-09-07
 
-**Decision:** NEEDS-WORK (Path D linux/amd64 match recorded; Path C-native-M1 mismatch permanently retained; not a release attestation)  
-**three_path_reproducibility:** needs-work  
-**passed:** blocked until new-tip verification and runtime logs are verified  
+**Decision:** PASSED after verified new-tip logs (Path D linux/amd64 match retained; Path C-native-M1 mismatch permanently retained; not a release attestation; provenance and overall remain needs-work)  
+**three_path_reproducibility:** passed  
+**passed:** unblocked by verified workflow runs [34190345146](https://github.com/Mitosis50/MIRRA/actions/runs/34190345146) runtime success, [34190345145](https://github.com/Mitosis50/MIRRA/actions/runs/34190345145) verification PR success, [34190343063](https://github.com/Mitosis50/MIRRA/actions/runs/34190343063) verification push success, all on tip `088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3`  
 **Paths A/B evidence tip:** `159d41bf75e3543893396f67135e53e31c9d3f08`  
 **Paths A/B evidence tree:** `ee002b307e0f5b9f24cbe36fcc78e318d430ca9f`  
 **Reviewed executable-source baseline:** `b8c56a1744b53aa9dae656bee17bc09fc717733e` (tree `1d7bf27932859b42e2fad1736ea1bf47490d7e80`)  
@@ -11,7 +11,15 @@
 
 ## Decision
 
-`decision` and `three_path_reproducibility` remain **needs-work**. This record does not set three-path reproducibility to passed. Path D-container-linux-amd64 is a MATCH and does not close the gate. **passed is blocked until new-tip verification and runtime logs are verified.**
+`three_path_reproducibility.decision` is **passed**. This is not a release attestation and does not change `scope.provenance` or `overall`, which remain **needs-work**. Path C-native-M1 remains a permanent **MISMATCH** and is not deleted. Path D-container-linux-amd64 remains a **MATCH**. The previous block ("passed is blocked until new-tip verification and runtime logs are verified") is lifted by the verified logs below. Mainnet trusted-root verification remains **open**. Release attestation remains **open**. PR #8 is not merge-cleared.
+
+Log evidence that unblocked passed, all success on tip `088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3`:
+
+- Runtime [34190345146](https://github.com/Mitosis50/MIRRA/actions/runs/34190345146): success, headSha `088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3`, RUNTIME_WASM_SHA256=`2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba`, MIRRA_RUNTIME_OK correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2
+- Verification PR [34190345145](https://github.com/Mitosis50/MIRRA/actions/runs/34190345145): success, same Wasm hash, P1 pin `37f218d3fb9695dbc62cd60955337067b6e55fa45a4d8c0a93ef8415278a3a2d`, Candid PASS, 99 vectors PASS
+- Verification push [34190343063](https://github.com/Mitosis50/MIRRA/actions/runs/34190343063): success, source_commit `088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3`, same Wasm hash
+
+Passed recorded: 2026-09-08T05:38:18Z (2026-09-07T22:38:18-0700 PT)
 
 ## Permanent failed path: Path C-native-M1 (`native_m1_mac`)
 
@@ -55,7 +63,7 @@ cmp /Users/aiagents/mirra-path-c-m1/artifacts/path-a-mirra_canister.wasm /Users/
 
 ## Path D-container-linux-amd64
 
-This is a separate measurement. It does not overwrite, replace, or relabel Path C-native-M1. Gate not closed.
+This is a separate measurement. It does not overwrite, replace, or relabel Path C-native-M1. Path D alone did not close the gate; the gate is now passed because the cited verification and runtime logs succeeded.
 
 - Permanent label: **Path D-container-linux-amd64**
 - Status: **MATCH**, byte-identical
@@ -85,7 +93,7 @@ docker run --name mirra-path-c-amd64-run --platform linux/amd64 -v /Users/aiagen
 
 `scripts/build-wasm.sh` hardcodes `cargo build --locked` and does not accept arguments. `wasm32-unknown-unknown` was added inside the image with `rustup target add wasm32-unknown-unknown --toolchain 1.88.0`.
 
-Both required checks match: SHA-256 and size 878189. `cmp` identical. This match is of reviewed source baseline `b8c56a1…`, not a rebuild of this evidence-commit tip. **passed is blocked until new-tip verification and runtime logs are verified.**
+Both required checks match: SHA-256 and size 878189. `cmp` identical. This match is of reviewed source baseline `b8c56a1…`, not a rebuild of this evidence-commit tip. Path D itself did not set `three_path_reproducibility` to passed. That decision is passed only because runtime 34190345146, verification PR 34190345145, and verification push 34190343063 succeeded on tip `088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3`.
 
 ## Continuity
 
@@ -138,10 +146,10 @@ The earlier Path C labeled `fully_separate_clean_host_env` remains withdrawn as 
 
 - `REVIEW.json` `scope.provenance` = **needs-work** (unchanged)
 - `REVIEW.json` `overall` = **needs-work** (unchanged)
-- `three_path_reproducibility.decision` = **needs-work** (not passed)
-- Path C-native-M1 = **MISMATCH**, permanently retained
-- Path D-container-linux-amd64 = **MATCH**, byte-identical; gate not closed
-- **passed is blocked until new-tip verification and runtime logs are verified**
+- `three_path_reproducibility.decision` = **passed** (unblocked by verified logs; not a provenance or overall pass)
+- Path C-native-M1 = **MISMATCH**, permanently retained, not deleted
+- Path D-container-linux-amd64 = **MATCH**, byte-identical, retained
+- passed unblocked by runtime [34190345146](https://github.com/Mitosis50/MIRRA/actions/runs/34190345146), verification PR [34190345145](https://github.com/Mitosis50/MIRRA/actions/runs/34190345145), verification push [34190343063](https://github.com/Mitosis50/MIRRA/actions/runs/34190343063)
 - Mainnet trusted-root verification = **open**
 - Release attestation = **open**
 - PR #8 not merge-cleared

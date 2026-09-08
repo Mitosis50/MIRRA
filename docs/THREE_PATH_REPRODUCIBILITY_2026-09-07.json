@@ -1,8 +1,8 @@
 {
   "schema": "mirra.p1.three-path-reproducibility.v1",
-  "status": "NEEDS_WORK_PATH_D_LINUX_AMD64_MATCH_RECORDED_PATH_C_NATIVE_M1_MISMATCH_RETAINED",
+  "status": "PASSED_AFTER_VERIFIED_LOGS_PATH_D_LINUX_AMD64_MATCH_PATH_C_NATIVE_M1_MISMATCH_RETAINED",
   "gate": "three_path_reproducibility",
-  "decision": "needs-work",
+  "decision": "passed",
   "observed_at_utc": "2026-09-07",
   "recorded_at_utc": "2026-09-08T05:21:19Z",
   "recorded_at_pt": "2026-09-07T22:21:19-0700",
@@ -42,7 +42,7 @@
       "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
       "match_expected": true,
       "notes": [
-        "BUILD_RECORD.source_commit 0c69388e024c8d13cd154be1b0fbbf5061ccd258 is staged candidate pin; tip head_sha is 159d41bf\u2026; tip rebuilds match artifact bytes."
+        "BUILD_RECORD.source_commit 0c69388e024c8d13cd154be1b0fbbf5061ccd258 is staged candidate pin; tip head_sha is 159d41bf…; tip rebuilds match artifact bytes."
       ]
     },
     "B": {
@@ -139,11 +139,11 @@
       "match_expected": true,
       "byte_identical": true,
       "cmp": "identical",
-      "decision": "match_recorded_gate_not_closed",
-      "three_path_reproducibility": "needs-work",
+      "decision": "match",
+      "three_path_reproducibility": "passed",
       "gate_closed_by_this_record": false,
-      "passed_blocked": true,
-      "passed_blocked_until": "new-tip verification and runtime logs are verified",
+      "passed_blocked": false,
+      "passed_blocked_until": null,
       "recorded_at_utc": "2026-09-08T05:07:39Z",
       "recorded_at_pt": "2026-09-07T22:07:39-0700",
       "cited_in_docs_at_utc": "2026-09-08T05:21:19Z",
@@ -215,7 +215,9 @@
       "reviewer_identity": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
       "independent_rehash": "MATCH",
       "independent_rehash_reviewer": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
-      "note": "passed is blocked until new-tip verification and runtime logs are verified. This Path D linux/amd64 match does not set three_path_reproducibility to passed and does not close the gate. Path C-native-M1 mismatch remains permanently retained and is not deleted or relabeled."
+      "note": "passed is blocked until new-tip verification and runtime logs are verified. This Path D linux/amd64 match does not set three_path_reproducibility to passed and does not close the gate. Path C-native-M1 mismatch remains permanently retained and is not deleted or relabeled.",
+      "current_three_path_decision_after_verified_logs": "passed",
+      "path_record_alone_did_not_close_gate": true
     }
   },
   "fidelity_review": {
@@ -226,35 +228,44 @@
     "caveats": [
       "Prior same-Debian Path C labeled fully_separate_clean_host_env remains withdrawn as not an independent environment.",
       "permanent_failed_paths.native_m1_mac is permanent negative evidence: Darwin arm64 / macOS 26.4.1 (25E253), rustc 1.88.0 (6b00bc388 2025-06-23) host aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b, tree fb53525d125501e4be009b69cceaf3db262c8d51, measured 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1 (878197 bytes) vs expected 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba (878189 bytes); cmp differs at byte 896. Both binaries preserved. Do not replace, rename, or delete this record.",
-      "Paths A and B still match 2edf7aab\u2026ac5aba. This native M1 path does not.",
+      "Paths A and B still match 2edf7aab…ac5aba. This native M1 path does not.",
       "This record does not set three_path_reproducibility to passed, does not claim mainnet or attestation, and does not clear PR #8 to merge.",
       "Path C-native-M1 remains MISMATCH and permanently retained (environment_label native_m1_mac is not deleted or relabeled). Hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896. Darwin arm64 / macOS 26.4.1, rustc 1.88.0 aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b.",
       "passed is blocked until new-tip verification and runtime logs are verified. three_path_reproducibility remains needs-work. Not a release attestation. No mainnet. PR #8 not merge-cleared.",
       "Path C-native-M1 remains MISMATCH and permanently retained (environment_label native_m1_mac is not deleted or relabeled). Hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896. Darwin arm64 / macOS 26.4.1, rustc 1.88.0 aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b.",
       "Path D-container-linux-amd64 MATCH, byte-identical. Expected/observed SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba. Size 878189. Source commit b8c56a1744b53aa9dae656bee17bc09fc717733e, tree 1d7bf27932859b42e2fad1736ea1bf47490d7e80. Image rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0, platform linux/amd64, rustc host x86_64-unknown-linux-gnu. Independent re-hash MATCH by MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. This match does not replace Path C-native-M1.",
-      "passed is blocked until new-tip verification and runtime logs are verified. three_path_reproducibility remains needs-work. Not a release attestation. No mainnet. PR #8 not merge-cleared."
+      "passed is blocked until new-tip verification and runtime logs are verified. three_path_reproducibility remains needs-work. Not a release attestation. No mainnet. PR #8 not merge-cleared.",
+      "three_path_reproducibility.decision is passed after verified logs on tip 088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3: runtime 34190345146 success (RUNTIME_WASM_SHA256=2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba, MIRRA_RUNTIME_OK correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2); verification PR 34190345145 success (same wasm hash, P1 pin 37f218d3fb9695dbc62cd60955337067b6e55fa45a4d8c0a93ef8415278a3a2d, Candid PASS, 99 vectors PASS); verification push 34190343063 success (source_commit 088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3, same wasm hash). Path C-native-M1 remains MISMATCH and is not deleted. Path D-container-linux-amd64 remains MATCH. scope.provenance and overall remain needs-work. Not a release attestation. No mainnet. PR #8 not merge-cleared."
     ],
     "corrected_at_utc": "2026-09-08T05:21:19Z",
-    "note": "passed is blocked until new-tip verification and runtime logs are verified. This Path D linux/amd64 match does not set three_path_reproducibility to passed and does not close the gate.",
+    "note": "three_path_reproducibility.decision is passed after verified new-tip logs (runtime 34190345146, verification PR 34190345145, verification push 34190343063, tip 088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3). fidelity_review.decision remains needs-work because Path C-native-M1 MISMATCH is permanently retained and A/B/C are not byte-identical. This is not a release attestation. No mainnet. PR #8 not merge-cleared. scope.provenance and overall remain needs-work.",
     "byte_identical_A_B": true,
     "path_d_independent_rehash": "MATCH",
     "path_d_independent_rehash_reviewer": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
-    "path_d_recorded_at_utc": "2026-09-08T05:21:19Z"
+    "path_d_recorded_at_utc": "2026-09-08T05:21:19Z",
+    "log_unblocked_at_utc": "2026-09-08T05:38:18Z"
   },
   "policy": {
     "scope_provenance": "needs-work",
     "overall": "needs-work",
-    "three_path_reproducibility": "needs-work",
+    "three_path_reproducibility": "passed",
     "mainnet_trusted_root_verification": "open",
     "release_attestation": "open",
     "pr8_merge_cleared": false,
     "no_source_proof_checker_cargo_build_script_candid_wasm_changes_in_this_commit": true,
-    "flipped_three_path_to_passed": false,
-    "passed_blocked_until": "new-tip verification and runtime logs are verified",
+    "flipped_three_path_to_passed": true,
+    "passed_blocked_until": null,
     "path_c_native_m1": "MISMATCH_permanently_retained",
-    "path_d_container_linux_amd64": "MATCH_byte_identical_gate_not_closed"
+    "path_d_container_linux_amd64": "MATCH_byte_identical",
+    "passed_blocked": false,
+    "previously_blocked_until": "new-tip verification and runtime logs are verified",
+    "passed_unblocked_by_workflow_runs": [
+      34190345146,
+      34190345145,
+      34190343063
+    ]
   },
-  "scope_note": "Records Path D-container-linux-amd64 MATCH (byte-identical, 878189 bytes, SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba) from pinned linux/amd64 rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0, rustc host x86_64-unknown-linux-gnu, source commit b8c56a1744b53aa9dae656bee17bc09fc717733e. Independent re-hash MATCH by MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. Path C-native-M1 MISMATCH remains permanently retained (native_m1_mac not deleted or relabeled): 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896. passed is blocked until new-tip verification and runtime logs are verified. three_path_reproducibility remains needs-work. Does not flip provenance or overall. Does not claim mainnet verification or release attestation. Does not clear PR #8 to merge. This commit is docs/REVIEW/SOURCE_MANIFEST only.",
+  "scope_note": "three_path_reproducibility.decision is passed after verified new-tip logs on 088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3. Runtime 34190345146 success, verification PR 34190345145 success, verification push 34190343063 success; wasm SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba. Path D-container-linux-amd64 MATCH retained (byte-identical, 878189 bytes, SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba) from pinned linux/amd64 rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0, source commit b8c56a1744b53aa9dae656bee17bc09fc717733e, reviewer MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. Path C-native-M1 MISMATCH remains permanently retained and not deleted (native_m1_mac not deleted or relabeled): 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes. scope.provenance remains needs-work. overall remains needs-work. Does not claim mainnet verification or release attestation. Does not clear PR #8 to merge. This commit is docs/REVIEW/SOURCE_MANIFEST only.",
   "correction": {
     "decision": "needs-work",
     "corrected_at_utc": "2026-09-08T04:44:42Z",
@@ -263,7 +274,7 @@
     "supersedes_recorded_at_utc": "2026-09-07T23:55:48Z",
     "reason": "Path D-container-linux-amd64 MATCH recorded (byte-identical to expected 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba, 878189 bytes) from source commit b8c56a1744b53aa9dae656bee17bc09fc717733e on rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0 linux/amd64. Independent re-hash MATCH by MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. Path C-native-M1 MISMATCH permanently retained; do not delete or relabel. passed is blocked until new-tip verification and runtime logs are verified. three_path_reproducibility remains needs-work.",
     "path_c_prior_label": "fully_separate_clean_host_env",
-    "path_c_prior_host": "Debian GNU/Linux 13 (trixie); Linux cursor 6.12.94+ x86_64 \u2014 same host/kernel as Path B",
+    "path_c_prior_host": "Debian GNU/Linux 13 (trixie); Linux cursor 6.12.94+ x86_64 — same host/kernel as Path B",
     "what_does_not_count": "separate CARGO_HOME and CARGO_TARGET_DIR on the same host",
     "path_c_status": "native_m1_mac_permanent_mismatch_recorded",
     "mainnet_trusted_root_verification": "open",
@@ -282,7 +293,9 @@
     "path_d_recorded_at_pt": "2026-09-07T22:21:19-0700",
     "path_d_result": "MATCH",
     "path_c_native_m1": "MISMATCH_permanently_retained",
-    "passed_blocked_until": "new-tip verification and runtime logs are verified"
+    "passed_blocked_until": "new-tip verification and runtime logs are verified",
+    "current_three_path_decision_after_log_unblock": "passed",
+    "log_unblock_recorded_at_utc": "2026-09-08T05:38:18Z"
   },
   "paths_a_b_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
   "permanent_failed_paths": {
@@ -437,11 +450,11 @@
     "match_expected": true,
     "byte_identical": true,
     "cmp": "identical",
-    "decision": "match_recorded_gate_not_closed",
-    "three_path_reproducibility": "needs-work",
+    "decision": "match",
+    "three_path_reproducibility": "passed",
     "gate_closed_by_this_record": false,
-    "passed_blocked": true,
-    "passed_blocked_until": "new-tip verification and runtime logs are verified",
+    "passed_blocked": false,
+    "passed_blocked_until": null,
     "recorded_at_utc": "2026-09-08T05:07:39Z",
     "recorded_at_pt": "2026-09-07T22:07:39-0700",
     "cited_in_docs_at_utc": "2026-09-08T05:21:19Z",
@@ -513,7 +526,9 @@
     "reviewer_identity": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
     "independent_rehash": "MATCH",
     "independent_rehash_reviewer": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
-    "note": "passed is blocked until new-tip verification and runtime logs are verified. This Path D linux/amd64 match does not set three_path_reproducibility to passed and does not close the gate. Path C-native-M1 mismatch remains permanently retained and is not deleted or relabeled."
+    "note": "passed is blocked until new-tip verification and runtime logs are verified. This Path D linux/amd64 match does not set three_path_reproducibility to passed and does not close the gate. Path C-native-M1 mismatch remains permanently retained and is not deleted or relabeled.",
+    "current_three_path_decision_after_verified_logs": "passed",
+    "path_record_alone_did_not_close_gate": true
   },
   "path_labels": {
     "Path C-native-M1": {
@@ -544,7 +559,68 @@
       "reviewer_identity": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
       "independent_rehash": "MATCH",
       "does_not_close_gate": true,
-      "record": "path_d_container_linux_amd64"
+      "record": "path_d_container_linux_amd64",
+      "gate_later_unblocked_by_verified_logs": true
     }
+  },
+  "passed_recorded_at_utc": "2026-09-08T05:38:18Z",
+  "passed_recorded_at_pt": "2026-09-07T22:38:18-0700",
+  "verified_logs_tip_commit": "088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3",
+  "log_evidence": {
+    "schema": "mirra.p1.three-path-log-unblock.v1",
+    "unblocks": "three_path_reproducibility.decision",
+    "decision": "passed",
+    "does_not_change": [
+      "scope.provenance",
+      "overall",
+      "mainnet_trusted_root_verification",
+      "release_attestation",
+      "pr8_merge"
+    ],
+    "verified_tip_commit": "088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3",
+    "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+    "recorded_at_utc": "2026-09-08T05:38:18Z",
+    "recorded_at_pt": "2026-09-07T22:38:18-0700",
+    "note": "User authorized this status update only after verification and runtime logs passed. These three workflow runs are the log evidence that unblocked three_path_reproducibility.decision=passed. Path C-native-M1 MISMATCH is permanently retained and not deleted. Path D-container-linux-amd64 MATCH is retained. This is not a mainnet claim, not a release attestation, and not a merge.",
+    "runs": [
+      {
+        "role": "runtime",
+        "name": "MIRRA runtime evidence",
+        "workflow": ".github/workflows/runtime-evidence.yml",
+        "event": "pull_request",
+        "run_id": 34190345146,
+        "url": "https://github.com/Mitosis50/MIRRA/actions/runs/34190345146",
+        "conclusion": "success",
+        "head_sha": "088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3",
+        "RUNTIME_WASM_SHA256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+        "MIRRA_RUNTIME_OK": "correction=1 retry=1 upgrade=1 retry_after_upgrade=1 next=2"
+      },
+      {
+        "role": "verification_pr",
+        "name": "MIRRA verification",
+        "workflow": ".github/workflows/ci.yml",
+        "event": "pull_request",
+        "run_id": 34190345145,
+        "url": "https://github.com/Mitosis50/MIRRA/actions/runs/34190345145",
+        "conclusion": "success",
+        "head_sha": "088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3",
+        "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+        "p1_pin": "37f218d3fb9695dbc62cd60955337067b6e55fa45a4d8c0a93ef8415278a3a2d",
+        "candid": "PASS",
+        "vectors": "99 PASS"
+      },
+      {
+        "role": "verification_push",
+        "name": "MIRRA verification",
+        "workflow": ".github/workflows/ci.yml",
+        "event": "push",
+        "run_id": 34190343063,
+        "url": "https://github.com/Mitosis50/MIRRA/actions/runs/34190343063",
+        "conclusion": "success",
+        "head_sha": "088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3",
+        "source_commit": "088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3",
+        "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba"
+      }
+    ]
   }
 }
