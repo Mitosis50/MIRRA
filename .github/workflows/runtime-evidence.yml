@@ -5,6 +5,9 @@ on:
   pull_request:
     paths:
       - 'integration-tests/**'
+      - 'src/**'
+      - 'verification/p1/**'
+      - 'scripts/build-wasm.sh'
       - 'artifacts/**'
       - 'scripts/verify-runtime.sh'
       - 'verification/runtime_preflight.py'
@@ -29,12 +32,18 @@ jobs:
           gzip --decompress "$RUNNER_TEMP/pocket-ic.gz"
           echo "29472ea4433b30a280676c4e22e369d79d5ba6ee1b4d48bab32ebe7d0ad2b4bb  $RUNNER_TEMP/pocket-ic" | sha256sum --check
           chmod +x "$RUNNER_TEMP/pocket-ic"
-      - name: Verify packaged RC5 retry, upgrade and certificates
+      - name: Build the staged candidate from this checkout
+        run: |
+          python3 verification/p1/check_candidate.py --check
+          bash scripts/build-wasm.sh
+      - name: Verify rebuilt candidate retry, upgrade and certificates
         env:
           POCKET_IC_BIN: ${{ runner.temp }}/pocket-ic
         run: |
           set -o pipefail
-          bash scripts/verify-runtime.sh 2>&1 | tee "$RUNNER_TEMP/mirra-runtime.log"
+          candidate="$GITHUB_WORKSPACE/target/wasm32-unknown-unknown/release/mirra_canister.wasm"
+          candidate_sha="$(sha256sum "$candidate" | cut -d ' ' -f 1)"
+          bash scripts/verify-runtime.sh "$candidate" "$candidate_sha" 2>&1 | tee "$RUNNER_TEMP/mirra-runtime.log"
       - name: Preserve runtime log
         if: always()
         uses: actions/upload-artifact@v4

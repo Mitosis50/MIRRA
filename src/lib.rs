@@ -21,7 +21,7 @@ use types::{
 };
 
 pub const VECTOR_SHA256: &str = "21c64f9ea4aef2440f3a3929497551b4d289b49fee28753d4a1f4412bef01b1b";
-pub const P1_CERT_SHA256: &str = "b9d1c0d5e0d8144d88f6e1375429fc844967731090d878ebd311072ee456a57b";
+pub const P1_CERT_SHA256: &str = "37f218d3fb9695dbc62cd60955337067b6e55fa45a4d8c0a93ef8415278a3a2d";
 const MAX_REGISTRY_SIZE: u64 = 4_096;
 const MAX_PAGE_SIZE: u32 = 100;
 

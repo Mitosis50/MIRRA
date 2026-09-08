@@ -24,14 +24,20 @@ This tree closes the code-level gaps found in the audited handoff:
 This is a production-oriented candidate, not a release declaration. The original
 P1 proof bytes have been recovered and hash-matched, but the proof's argument
 enclosure is invalid. Its digest is now blocked by the release intake gate.
-A corrected derivation is a review candidate, not an issued certificate.
-See [the withdrawal record](docs/P1_PROOF_WITHDRAWAL_2026-09-03.md).
-A real PocketIC upgrade harness is included, but it must pass on a host that
-permits PocketIC's local Unix-socket endpoint.
+A replacement proof and both source pins are staged at **0.500000043 output
+ulp**, with **N=14 unchanged**. Independent review is pending and release intake
+still rejects the candidate. Start at the [P1 review packet](verification/p1/README.md)
+and [premise census](verification/p1/PREMISE_CENSUS.md).
 
-The current Wasm digest and its verification evidence are recorded in
-[docs/PROVENANCE.md](docs/PROVENANCE.md). Older dated reports describe historical
-artifacts, not a second current build.
+PR #1's verification/runtime workflows and its merged-main verification run
+passed, as confirmed from their [actual job logs](docs/P1_BASELINE_WORKFLOW_EVIDENCE_2026-09-03.json).
+Those runs concern the baseline; this pin increment receives fresh CI builds
+and runtime evidence for its own source and measured Wasm.
+
+The checked-in RC5 Wasm and [its provenance](docs/PROVENANCE.md) remain historical
+baseline evidence. Download this branch's newly built candidate from its GitHub
+verification workflow artifact, which includes `BUILD_RECORD.json` and hashes.
+It is not a production release.
 
 Do not label a build release-ready until `scripts/verify-release.sh` exits zero
 and replacement P1 mathematics, certificate provenance, authoritative review,
@@ -47,6 +53,7 @@ Requirements: Rust 1.88.0, Python 3, `candid-extractor` 0.1.6, PocketIC 15.0.0
 cargo test --locked
 cargo clippy --locked --all-targets -- -D warnings
 python3 verification/p1/exp_q32_production.py
+python3 verification/p1/check_candidate.py --check
 python3 verification/generate_vectors.py --check
 bash scripts/build-wasm.sh
 CANDID_EXTRACTOR=candid-extractor bash scripts/verify-candid.sh
@@ -69,5 +76,6 @@ See [docs/PROTOCOL.md](docs/PROTOCOL.md) for consensus semantics and
 The authoritative maintainer procedure and signed GitHub provenance workflow
 are documented in [docs/UPSTREAM_ATTESTATION.md](docs/UPSTREAM_ATTESTATION.md).
 
-The [runtime handoff](docs/RUNTIME_HANDOFF_2026-09-03.md) runs the packaged RC5
-Wasm separately from release approval while replacement P1 review is pending.
+The [original runtime handoff](docs/RUNTIME_HANDOFF_2026-09-03.md) documents the
+RC5 baseline. The current runtime workflow explicitly builds and measures this
+checkout before checking retry, upgrade and certificates with pinned PocketIC.

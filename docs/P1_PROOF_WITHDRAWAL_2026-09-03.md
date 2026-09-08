@@ -1,5 +1,11 @@
 # P1 proof withdrawal and replacement requirements
 
+Staging update: the complete corrected derivation, premise census and candidate
+proof now appear in [the review packet](../verification/p1/README.md). This
+branch increments both pins to those candidate bytes while retaining a pending
+independent-review gate. The original withdrawal account below describes the
+baseline repair; it remains historical evidence.
+
 The recovered original proof JSON has SHA-256
 `b9d1c0d5e0d8144d88f6e1375429fc844967731090d878ebd311072ee456a57b`.
 That digest proves which bytes were recovered. The bytes contain an invalid
