@@ -217,7 +217,9 @@
       "independent_rehash_reviewer": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
       "note": "passed is blocked until new-tip verification and runtime logs are verified. This Path D linux/amd64 match does not set three_path_reproducibility to passed and does not close the gate. Path C-native-M1 mismatch remains permanently retained and is not deleted or relabeled.",
       "current_three_path_decision_after_verified_logs": "passed",
-      "path_record_alone_did_not_close_gate": true
+      "path_record_alone_did_not_close_gate": true,
+      "in_qualifying_set": true,
+      "qualifying_third_path": true
     }
   },
   "fidelity_review": {
@@ -263,9 +265,22 @@
       34190345146,
       34190345145,
       34190343063
-    ]
+    ],
+    "qualifying": [
+      "A",
+      "B",
+      "D"
+    ],
+    "byte_identical_paths": [
+      "A",
+      "B",
+      "D"
+    ],
+    "independent_third_path": true,
+    "qualifying_third_path": "D",
+    "path_c_native_m1_in_qualifying_set": false
   },
-  "scope_note": "three_path_reproducibility.decision is passed after verified new-tip logs on 088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3. Runtime 34190345146 success, verification PR 34190345145 success, verification push 34190343063 success; wasm SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba. Path D-container-linux-amd64 MATCH retained (byte-identical, 878189 bytes, SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba) from pinned linux/amd64 rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0, source commit b8c56a1744b53aa9dae656bee17bc09fc717733e, reviewer MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. Path C-native-M1 MISMATCH remains permanently retained and not deleted (native_m1_mac not deleted or relabeled): 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes. scope.provenance remains needs-work. overall remains needs-work. Does not claim mainnet verification or release attestation. Does not clear PR #8 to merge. This commit is docs/REVIEW/SOURCE_MANIFEST only.",
+  "scope_note": "three_path_reproducibility.decision is passed after verified new-tip logs on 088b4eb2ba4fa9ccdf48a716bc32a2b73c5c62f3. Runtime 34190345146 success, verification PR 34190345145 success, verification push 34190343063 success; wasm SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba. Path D-container-linux-amd64 MATCH retained (byte-identical, 878189 bytes, SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba) from pinned linux/amd64 rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0, source commit b8c56a1744b53aa9dae656bee17bc09fc717733e, reviewer MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. Path C-native-M1 MISMATCH remains permanently retained and not deleted (native_m1_mac not deleted or relabeled): 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes. scope.provenance remains needs-work. overall remains needs-work. Does not claim mainnet verification or release attestation. Does not clear PR #8 to merge. This commit is docs/REVIEW/SOURCE_MANIFEST only. Scope correction: user independently confirmed three_path_reproducibility=passed is supported, scoped specifically to qualifying Paths A, B, and D. qualifying and byte_identical_paths are [\"A\", \"B\", \"D\"], not only A and B. independent_third_path is true for the qualifying set; Path D is the qualifying third path. Path C-native-M1 remains permanently visible as MISMATCH, is not deleted or relabeled, and is not in the qualifying set. scope.provenance remains needs-work. overall remains needs-work. Mainnet and attestation remain open. Not a merge. Scope correction: user independently confirmed three_path_reproducibility=passed is supported, scoped specifically to qualifying Paths A, B, and D. qualifying and byte_identical_paths are [\"A\", \"B\", \"D\"], not only A and B. independent_third_path is true for the qualifying set; Path D is the qualifying third path. Path C-native-M1 remains permanently visible as MISMATCH, is not deleted or relabeled, and is not in the qualifying set. scope.provenance remains needs-work. overall remains needs-work. Mainnet and attestation remain open. Not a merge.",
   "correction": {
     "decision": "needs-work",
     "corrected_at_utc": "2026-09-08T04:44:42Z",
@@ -366,7 +381,8 @@
       "note": "Path C-native-M1 MISMATCH, permanently retained. environment_label remains native_m1_mac; do not delete or relabel this record. Hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896. Darwin arm64 / macOS 26.4.1, rustc 1.88.0 aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b. A later Path D container match does not cancel or replace this mismatch.",
       "permanent_label": "Path C-native-M1",
       "do_not_delete_or_relabel": true,
-      "first_differing_byte": 896
+      "first_differing_byte": 896,
+      "in_qualifying_set": false
     }
   },
   "native_m1_mac": {
@@ -436,7 +452,8 @@
     "note": "Path C-native-M1 MISMATCH, permanently retained. environment_label remains native_m1_mac; do not delete or relabel this record. Hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896. Darwin arm64 / macOS 26.4.1, rustc 1.88.0 aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b. A later Path D container match does not cancel or replace this mismatch.",
     "permanent_label": "Path C-native-M1",
     "do_not_delete_or_relabel": true,
-    "first_differing_byte": 896
+    "first_differing_byte": 896,
+    "in_qualifying_set": false
   },
   "path_d_container_linux_amd64": {
     "schema": "mirra.p1.path-d-container-linux-amd64.v1",
@@ -528,7 +545,9 @@
     "independent_rehash_reviewer": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
     "note": "passed is blocked until new-tip verification and runtime logs are verified. This Path D linux/amd64 match does not set three_path_reproducibility to passed and does not close the gate. Path C-native-M1 mismatch remains permanently retained and is not deleted or relabeled.",
     "current_three_path_decision_after_verified_logs": "passed",
-    "path_record_alone_did_not_close_gate": true
+    "path_record_alone_did_not_close_gate": true,
+    "in_qualifying_set": true,
+    "qualifying_third_path": true
   },
   "path_labels": {
     "Path C-native-M1": {
@@ -543,7 +562,8 @@
       "host": "Darwin arm64 / macOS 26.4.1",
       "rustc": "rustc 1.88.0",
       "rustc_host": "aarch64-apple-darwin",
-      "tip_built": "1c73473c23b264e5eda6886d6a398fee95c73c2b"
+      "tip_built": "1c73473c23b264e5eda6886d6a398fee95c73c2b",
+      "in_qualifying_set": false
     },
     "Path D-container-linux-amd64": {
       "status": "MATCH",
@@ -560,7 +580,9 @@
       "independent_rehash": "MATCH",
       "does_not_close_gate": true,
       "record": "path_d_container_linux_amd64",
-      "gate_later_unblocked_by_verified_logs": true
+      "gate_later_unblocked_by_verified_logs": true,
+      "in_qualifying_set": true,
+      "qualifying_third_path": true
     }
   },
   "passed_recorded_at_utc": "2026-09-08T05:38:18Z",
@@ -622,5 +644,30 @@
         "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba"
       }
     ]
+  },
+  "qualifying": [
+    "A",
+    "B",
+    "D"
+  ],
+  "byte_identical_paths": [
+    "A",
+    "B",
+    "D"
+  ],
+  "independent_third_path": true,
+  "independent_third_path_scope": "qualifying_set",
+  "qualifying_third_path": "D",
+  "not_in_qualifying_set": [
+    "C-native-M1"
+  ],
+  "byte_identical_across_paths_note": "false because Path C-native-M1 remains a permanent MISMATCH and is excluded from the qualifying set. qualifying and byte_identical_paths list the qualifying set only: A, B, and D.",
+  "independent_third_path_note": "true for the qualifying set. Path D is the qualifying third path. Path C-native-M1 remains a permanent MISMATCH and is not in the qualifying set.",
+  "scope_corrected_at_utc": "2026-09-08T05:53:29Z",
+  "scope_corrected_at_pt": "2026-09-07T22:53:29-0700",
+  "qualifying_path_labels": {
+    "A": "GitHub Actions successful verification build artifact",
+    "B": "Grok clean Linux checkout/build",
+    "D": "Path D-container-linux-amd64"
   }
 }
