@@ -1,11 +1,11 @@
 {
   "schema": "mirra.p1.three-path-reproducibility.v1",
-  "status": "NEEDS_WORK_NATIVE_M1_MISMATCH_RECORDED",
+  "status": "NEEDS_WORK_PATH_D_LINUX_AMD64_MATCH_RECORDED_PATH_C_NATIVE_M1_MISMATCH_RETAINED",
   "gate": "three_path_reproducibility",
   "decision": "needs-work",
   "observed_at_utc": "2026-09-07",
-  "recorded_at_utc": "2026-09-08T04:57:30Z",
-  "recorded_at_pt": "2026-09-07T21:57:30-0700",
+  "recorded_at_utc": "2026-09-08T05:21:19Z",
+  "recorded_at_pt": "2026-09-07T22:21:19-0700",
   "tip_commit": "159d41bf75e3543893396f67135e53e31c9d3f08",
   "tip_tree": "ee002b307e0f5b9f24cbe36fcc78e318d430ca9f",
   "reviewed_source_baseline": {
@@ -126,6 +126,96 @@
       "not_the_native_m1_record": true,
       "superseded_as_independent_path_by": "permanent_failed_paths.native_m1_mac",
       "withdrawal_remains": "Prior same-Debian Path C remains withdrawn as not an independent environment. This object is retained as that withdrawal record. It is not the native M1 mismatch and must not be used to erase native_m1_mac."
+    },
+    "D-container-linux-amd64": {
+      "schema": "mirra.p1.path-d-container-linux-amd64.v1",
+      "record_id": "Path D-container-linux-amd64",
+      "permanent_label": "Path D-container-linux-amd64",
+      "environment_label": "pinned_linux_amd64_container",
+      "separate_from": "Path C-native-M1",
+      "does_not_replace_path_c_native_m1_mismatch": true,
+      "does_not_replace_native_m1_mac": true,
+      "result": "match",
+      "match_expected": true,
+      "byte_identical": true,
+      "cmp": "identical",
+      "decision": "match_recorded_gate_not_closed",
+      "three_path_reproducibility": "needs-work",
+      "gate_closed_by_this_record": false,
+      "passed_blocked": true,
+      "passed_blocked_until": "new-tip verification and runtime logs are verified",
+      "recorded_at_utc": "2026-09-08T05:07:39Z",
+      "recorded_at_pt": "2026-09-07T22:07:39-0700",
+      "cited_in_docs_at_utc": "2026-09-08T05:21:19Z",
+      "host_machine": {
+        "kind": "mac_docker",
+        "machineId": "8f5619b6-6eaf-4da5-b552-2a582cb7c713",
+        "not_the_grok_debian_box": true
+      },
+      "container": {
+        "image": "rust:1.88.0",
+        "image_ref": "rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0",
+        "digest": "sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0",
+        "platform": "linux/amd64",
+        "os_arch": "linux/amd64",
+        "uname_sm": "Linux x86_64",
+        "never_linux_arm64": true
+      },
+      "source": {
+        "repo": "https://github.com/Mitosis50/MIRRA.git",
+        "built_commit": "b8c56a1744b53aa9dae656bee17bc09fc717733e",
+        "built_tree": "1d7bf27932859b42e2fad1736ea1bf47490d7e80",
+        "not_pr_tip": true,
+        "not_this_evidence_commit": true,
+        "checkout": "/Users/aiagents/mirra-path-c-amd64/src",
+        "head_verified": true,
+        "fresh_checkout": true,
+        "reused_target_cache": false
+      },
+      "toolchain": {
+        "rustc": "rustc 1.88.0 (6b00bc388 2025-06-23)",
+        "rustc_host": "x86_64-unknown-linux-gnu",
+        "cargo": "cargo 1.88.0 (873a06493 2025-05-10)",
+        "CARGO_HOME": "/tmp/cargo-home",
+        "CARGO_TARGET_DIR": "/tmp/target",
+        "CARGO_HOME_created_empty_inside_container": true,
+        "CARGO_TARGET_DIR_created_empty_inside_container": true,
+        "host_cargo_cache_mounted": false,
+        "source_mount_only": "/Users/aiagents/mirra-path-c-amd64/src:/src:ro",
+        "CARGO_INCREMENTAL": "0",
+        "sccache": "unset / not used",
+        "locked": true,
+        "build_script": "bash scripts/build-wasm.sh",
+        "locked_note": "scripts/build-wasm.sh hardcodes cargo build --locked and does not accept arguments",
+        "wasm32_target_added_inside_image": "rustup target add wasm32-unknown-unknown --toolchain 1.88.0"
+      },
+      "commands": [
+        "docker buildx imagetools inspect rust:1.88.0  # linux/amd64 digest sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0",
+        "docker pull --platform linux/amd64 rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0",
+        "git clone --branch p1-surviving-bound-stage-2026-09-03 --single-branch https://github.com/Mitosis50/MIRRA.git /Users/aiagents/mirra-path-c-amd64/src",
+        "git checkout --detach b8c56a1744b53aa9dae656bee17bc09fc717733e",
+        "git rev-parse HEAD  # b8c56a1744b53aa9dae656bee17bc09fc717733e",
+        "docker run --name mirra-path-c-amd64-run --platform linux/amd64 -v /Users/aiagents/mirra-path-c-amd64/src:/src:ro -e CARGO_HOME=/tmp/cargo-home -e CARGO_TARGET_DIR=/tmp/target -e CARGO_INCREMENTAL=0 -w /src rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0 bash scripts/build-wasm.sh"
+      ],
+      "commands_source": "PATH_C_AMD64.json recorded 2026-09-08T05:07:39Z",
+      "build": {
+        "started_utc": "2026-09-08T05:01:23Z",
+        "ended_utc": "2026-09-08T05:04:47Z",
+        "cargo_finished": "Finished `release` profile [optimized] target(s) in 3m 15s"
+      },
+      "expected_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "expected_wasm_bytes": 878189,
+      "observed_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "observed_wasm_bytes": 878189,
+      "measured_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "measured_wasm_bytes": 878189,
+      "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "wasm_bytes": 878189,
+      "both_required_match": true,
+      "reviewer_identity": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
+      "independent_rehash": "MATCH",
+      "independent_rehash_reviewer": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
+      "note": "passed is blocked until new-tip verification and runtime logs are verified. This Path D linux/amd64 match does not set three_path_reproducibility to passed and does not close the gate. Path C-native-M1 mismatch remains permanently retained and is not deleted or relabeled."
     }
   },
   "fidelity_review": {
@@ -137,11 +227,19 @@
       "Prior same-Debian Path C labeled fully_separate_clean_host_env remains withdrawn as not an independent environment.",
       "permanent_failed_paths.native_m1_mac is permanent negative evidence: Darwin arm64 / macOS 26.4.1 (25E253), rustc 1.88.0 (6b00bc388 2025-06-23) host aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b, tree fb53525d125501e4be009b69cceaf3db262c8d51, measured 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1 (878197 bytes) vs expected 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba (878189 bytes); cmp differs at byte 896. Both binaries preserved. Do not replace, rename, or delete this record.",
       "Paths A and B still match 2edf7aab\u2026ac5aba. This native M1 path does not.",
-      "This record does not set three_path_reproducibility to passed, does not claim mainnet or attestation, and does not clear PR #8 to merge."
+      "This record does not set three_path_reproducibility to passed, does not claim mainnet or attestation, and does not clear PR #8 to merge.",
+      "Path C-native-M1 remains MISMATCH and permanently retained (environment_label native_m1_mac is not deleted or relabeled). Hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896. Darwin arm64 / macOS 26.4.1, rustc 1.88.0 aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b.",
+      "passed is blocked until new-tip verification and runtime logs are verified. three_path_reproducibility remains needs-work. Not a release attestation. No mainnet. PR #8 not merge-cleared.",
+      "Path C-native-M1 remains MISMATCH and permanently retained (environment_label native_m1_mac is not deleted or relabeled). Hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896. Darwin arm64 / macOS 26.4.1, rustc 1.88.0 aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b.",
+      "Path D-container-linux-amd64 MATCH, byte-identical. Expected/observed SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba. Size 878189. Source commit b8c56a1744b53aa9dae656bee17bc09fc717733e, tree 1d7bf27932859b42e2fad1736ea1bf47490d7e80. Image rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0, platform linux/amd64, rustc host x86_64-unknown-linux-gnu. Independent re-hash MATCH by MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. This match does not replace Path C-native-M1.",
+      "passed is blocked until new-tip verification and runtime logs are verified. three_path_reproducibility remains needs-work. Not a release attestation. No mainnet. PR #8 not merge-cleared."
     ],
-    "corrected_at_utc": "2026-09-08T04:57:30Z",
-    "note": "Three-path reproducibility remains needs-work. native_m1_mac is a permanent failed path, not a pass and not a pending placeholder.",
-    "byte_identical_A_B": true
+    "corrected_at_utc": "2026-09-08T05:21:19Z",
+    "note": "passed is blocked until new-tip verification and runtime logs are verified. This Path D linux/amd64 match does not set three_path_reproducibility to passed and does not close the gate.",
+    "byte_identical_A_B": true,
+    "path_d_independent_rehash": "MATCH",
+    "path_d_independent_rehash_reviewer": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
+    "path_d_recorded_at_utc": "2026-09-08T05:21:19Z"
   },
   "policy": {
     "scope_provenance": "needs-work",
@@ -151,16 +249,19 @@
     "release_attestation": "open",
     "pr8_merge_cleared": false,
     "no_source_proof_checker_cargo_build_script_candid_wasm_changes_in_this_commit": true,
-    "flipped_three_path_to_passed": false
+    "flipped_three_path_to_passed": false,
+    "passed_blocked_until": "new-tip verification and runtime logs are verified",
+    "path_c_native_m1": "MISMATCH_permanently_retained",
+    "path_d_container_linux_amd64": "MATCH_byte_identical_gate_not_closed"
   },
-  "scope_note": "Adds permanent failed path native_m1_mac. Does not replace, rename, or delete that mismatch. Prior same-Debian Path C remains withdrawn as not an independent environment. Paths A and B still match expected Wasm. three_path_reproducibility remains needs-work. Does not flip provenance or overall. Does not claim mainnet verification or release attestation. Does not clear PR #8 to merge. This commit is docs/REVIEW/SOURCE_MANIFEST only.",
+  "scope_note": "Records Path D-container-linux-amd64 MATCH (byte-identical, 878189 bytes, SHA-256 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba) from pinned linux/amd64 rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0, rustc host x86_64-unknown-linux-gnu, source commit b8c56a1744b53aa9dae656bee17bc09fc717733e. Independent re-hash MATCH by MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. Path C-native-M1 MISMATCH remains permanently retained (native_m1_mac not deleted or relabeled): 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896. passed is blocked until new-tip verification and runtime logs are verified. three_path_reproducibility remains needs-work. Does not flip provenance or overall. Does not claim mainnet verification or release attestation. Does not clear PR #8 to merge. This commit is docs/REVIEW/SOURCE_MANIFEST only.",
   "correction": {
     "decision": "needs-work",
     "corrected_at_utc": "2026-09-08T04:44:42Z",
     "corrected_at_pt": "2026-09-07T21:44:42-0700",
     "supersedes_decision": "passed",
     "supersedes_recorded_at_utc": "2026-09-07T23:55:48Z",
-    "reason": "permanent_failed_paths.native_m1_mac recorded: hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, cmp at byte 896. Prior same-Debian Path C remains withdrawn as not an independent environment. three_path_reproducibility remains needs-work. Do not replace, rename, or delete the native M1 mismatch.",
+    "reason": "Path D-container-linux-amd64 MATCH recorded (byte-identical to expected 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba, 878189 bytes) from source commit b8c56a1744b53aa9dae656bee17bc09fc717733e on rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0 linux/amd64. Independent re-hash MATCH by MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b. Path C-native-M1 MISMATCH permanently retained; do not delete or relabel. passed is blocked until new-tip verification and runtime logs are verified. three_path_reproducibility remains needs-work.",
     "path_c_prior_label": "fully_separate_clean_host_env",
     "path_c_prior_host": "Debian GNU/Linux 13 (trixie); Linux cursor 6.12.94+ x86_64 \u2014 same host/kernel as Path B",
     "what_does_not_count": "separate CARGO_HOME and CARGO_TARGET_DIR on the same host",
@@ -176,7 +277,12 @@
     "measured_wasm_bytes": 878197,
     "expected_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
     "expected_wasm_bytes": 878189,
-    "cmp": "differ: char 896"
+    "cmp": "differ: char 896",
+    "path_d_recorded_at_utc": "2026-09-08T05:21:19Z",
+    "path_d_recorded_at_pt": "2026-09-07T22:21:19-0700",
+    "path_d_result": "MATCH",
+    "path_c_native_m1": "MISMATCH_permanently_retained",
+    "passed_blocked_until": "new-tip verification and runtime logs are verified"
   },
   "paths_a_b_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
   "permanent_failed_paths": {
@@ -244,7 +350,10 @@
       },
       "paths_a_b_still_match_expected": true,
       "paths_a_b_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
-      "note": "Permanent negative evidence. Native Darwin arm64 rustc 1.88.0 produced a different Wasm than Paths A/B. Do not replace, rename, or delete this record. It is not cancelled by any later container measurement."
+      "note": "Path C-native-M1 MISMATCH, permanently retained. environment_label remains native_m1_mac; do not delete or relabel this record. Hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896. Darwin arm64 / macOS 26.4.1, rustc 1.88.0 aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b. A later Path D container match does not cancel or replace this mismatch.",
+      "permanent_label": "Path C-native-M1",
+      "do_not_delete_or_relabel": true,
+      "first_differing_byte": 896
     }
   },
   "native_m1_mac": {
@@ -311,6 +420,131 @@
     },
     "paths_a_b_still_match_expected": true,
     "paths_a_b_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
-    "note": "Permanent negative evidence. Native Darwin arm64 rustc 1.88.0 produced a different Wasm than Paths A/B. Do not replace, rename, or delete this record. It is not cancelled by any later container measurement."
+    "note": "Path C-native-M1 MISMATCH, permanently retained. environment_label remains native_m1_mac; do not delete or relabel this record. Hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, first differing byte 896. Darwin arm64 / macOS 26.4.1, rustc 1.88.0 aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b. A later Path D container match does not cancel or replace this mismatch.",
+    "permanent_label": "Path C-native-M1",
+    "do_not_delete_or_relabel": true,
+    "first_differing_byte": 896
+  },
+  "path_d_container_linux_amd64": {
+    "schema": "mirra.p1.path-d-container-linux-amd64.v1",
+    "record_id": "Path D-container-linux-amd64",
+    "permanent_label": "Path D-container-linux-amd64",
+    "environment_label": "pinned_linux_amd64_container",
+    "separate_from": "Path C-native-M1",
+    "does_not_replace_path_c_native_m1_mismatch": true,
+    "does_not_replace_native_m1_mac": true,
+    "result": "match",
+    "match_expected": true,
+    "byte_identical": true,
+    "cmp": "identical",
+    "decision": "match_recorded_gate_not_closed",
+    "three_path_reproducibility": "needs-work",
+    "gate_closed_by_this_record": false,
+    "passed_blocked": true,
+    "passed_blocked_until": "new-tip verification and runtime logs are verified",
+    "recorded_at_utc": "2026-09-08T05:07:39Z",
+    "recorded_at_pt": "2026-09-07T22:07:39-0700",
+    "cited_in_docs_at_utc": "2026-09-08T05:21:19Z",
+    "host_machine": {
+      "kind": "mac_docker",
+      "machineId": "8f5619b6-6eaf-4da5-b552-2a582cb7c713",
+      "not_the_grok_debian_box": true
+    },
+    "container": {
+      "image": "rust:1.88.0",
+      "image_ref": "rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0",
+      "digest": "sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0",
+      "platform": "linux/amd64",
+      "os_arch": "linux/amd64",
+      "uname_sm": "Linux x86_64",
+      "never_linux_arm64": true
+    },
+    "source": {
+      "repo": "https://github.com/Mitosis50/MIRRA.git",
+      "built_commit": "b8c56a1744b53aa9dae656bee17bc09fc717733e",
+      "built_tree": "1d7bf27932859b42e2fad1736ea1bf47490d7e80",
+      "not_pr_tip": true,
+      "not_this_evidence_commit": true,
+      "checkout": "/Users/aiagents/mirra-path-c-amd64/src",
+      "head_verified": true,
+      "fresh_checkout": true,
+      "reused_target_cache": false
+    },
+    "toolchain": {
+      "rustc": "rustc 1.88.0 (6b00bc388 2025-06-23)",
+      "rustc_host": "x86_64-unknown-linux-gnu",
+      "cargo": "cargo 1.88.0 (873a06493 2025-05-10)",
+      "CARGO_HOME": "/tmp/cargo-home",
+      "CARGO_TARGET_DIR": "/tmp/target",
+      "CARGO_HOME_created_empty_inside_container": true,
+      "CARGO_TARGET_DIR_created_empty_inside_container": true,
+      "host_cargo_cache_mounted": false,
+      "source_mount_only": "/Users/aiagents/mirra-path-c-amd64/src:/src:ro",
+      "CARGO_INCREMENTAL": "0",
+      "sccache": "unset / not used",
+      "locked": true,
+      "build_script": "bash scripts/build-wasm.sh",
+      "locked_note": "scripts/build-wasm.sh hardcodes cargo build --locked and does not accept arguments",
+      "wasm32_target_added_inside_image": "rustup target add wasm32-unknown-unknown --toolchain 1.88.0"
+    },
+    "commands": [
+      "docker buildx imagetools inspect rust:1.88.0  # linux/amd64 digest sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0",
+      "docker pull --platform linux/amd64 rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0",
+      "git clone --branch p1-surviving-bound-stage-2026-09-03 --single-branch https://github.com/Mitosis50/MIRRA.git /Users/aiagents/mirra-path-c-amd64/src",
+      "git checkout --detach b8c56a1744b53aa9dae656bee17bc09fc717733e",
+      "git rev-parse HEAD  # b8c56a1744b53aa9dae656bee17bc09fc717733e",
+      "docker run --name mirra-path-c-amd64-run --platform linux/amd64 -v /Users/aiagents/mirra-path-c-amd64/src:/src:ro -e CARGO_HOME=/tmp/cargo-home -e CARGO_TARGET_DIR=/tmp/target -e CARGO_INCREMENTAL=0 -w /src rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0 bash scripts/build-wasm.sh"
+    ],
+    "commands_source": "PATH_C_AMD64.json recorded 2026-09-08T05:07:39Z",
+    "build": {
+      "started_utc": "2026-09-08T05:01:23Z",
+      "ended_utc": "2026-09-08T05:04:47Z",
+      "cargo_finished": "Finished `release` profile [optimized] target(s) in 3m 15s"
+    },
+    "expected_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+    "expected_wasm_bytes": 878189,
+    "observed_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+    "observed_wasm_bytes": 878189,
+    "measured_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+    "measured_wasm_bytes": 878189,
+    "wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+    "wasm_bytes": 878189,
+    "both_required_match": true,
+    "reviewer_identity": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
+    "independent_rehash": "MATCH",
+    "independent_rehash_reviewer": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
+    "note": "passed is blocked until new-tip verification and runtime logs are verified. This Path D linux/amd64 match does not set three_path_reproducibility to passed and does not close the gate. Path C-native-M1 mismatch remains permanently retained and is not deleted or relabeled."
+  },
+  "path_labels": {
+    "Path C-native-M1": {
+      "status": "MISMATCH",
+      "permanently_retained": true,
+      "do_not_delete_or_relabel": true,
+      "environment_label_retained": "native_m1_mac",
+      "record": "permanent_failed_paths.native_m1_mac",
+      "hash": "9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1",
+      "bytes": 878197,
+      "first_differing_byte": 896,
+      "host": "Darwin arm64 / macOS 26.4.1",
+      "rustc": "rustc 1.88.0",
+      "rustc_host": "aarch64-apple-darwin",
+      "tip_built": "1c73473c23b264e5eda6886d6a398fee95c73c2b"
+    },
+    "Path D-container-linux-amd64": {
+      "status": "MATCH",
+      "byte_identical": true,
+      "expected_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "observed_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "bytes": 878189,
+      "source_commit": "b8c56a1744b53aa9dae656bee17bc09fc717733e",
+      "source_tree": "1d7bf27932859b42e2fad1736ea1bf47490d7e80",
+      "image": "rust@sha256:4727898c104ecd2e22d780925832502faee9fe4e70581b8572af081370b315a0",
+      "platform": "linux/amd64",
+      "rustc_host": "x86_64-unknown-linux-gnu",
+      "reviewer_identity": "MIRRA Commons Reviewer 2558ecf1-0890-46d4-ab0e-e477f2aa067b",
+      "independent_rehash": "MATCH",
+      "does_not_close_gate": true,
+      "record": "path_d_container_linux_amd64"
+    }
   }
 }
