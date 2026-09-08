@@ -1,33 +1,67 @@
 # MIRRA three-path reproducibility — 2026-09-07
 
-**Decision:** NEEDS-WORK (pending genuine third host; not a release attestation)  
-**Tip of prior evidence record:** `159d41bf75e3543893396f67135e53e31c9d3f08`  
-**Tip tree of prior evidence record:** `ee002b307e0f5b9f24cbe36fcc78e318d430ca9f`  
+**Decision:** NEEDS-WORK (native M1 mismatch recorded; not a release attestation)  
+**three_path_reproducibility:** needs-work  
+**Paths A/B evidence tip:** `159d41bf75e3543893396f67135e53e31c9d3f08`  
+**Paths A/B evidence tree:** `ee002b307e0f5b9f24cbe36fcc78e318d430ca9f`  
 **Reviewed executable-source baseline:** `b8c56a1744b53aa9dae656bee17bc09fc717733e` (tree `1d7bf27932859b42e2fad1736ea1bf47490d7e80`)  
-**Expected Wasm SHA-256:** `2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba`
+**Expected / Paths A and B Wasm SHA-256:** `2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba` (878189 bytes)  
+**Recorded:** 2026-09-08T04:57:30Z (2026-09-07T21:57:30-0700 PT)
 
-## Correction
+## Decision
 
-The earlier **passed** decision is withdrawn.
+`decision` and `three_path_reproducibility` remain **needs-work**. This record does not set three-path reproducibility to passed.
 
-Reason: prior Path C labeled `fully_separate_clean_host_env` was the same Debian host/kernel as Path B (`Linux cursor 6.12.94+`, Debian GNU/Linux 13). Separate `CARGO_HOME` / `CARGO_TARGET_DIR` do not count as an independent third environment. Path C is pending an M1 Mac (or pinned container) rebuild.
+## Permanent failed path: `native_m1_mac`
 
-This correction does not claim mainnet trusted-root verification or release attestation, and does not clear PR #8 to merge.
+This object is permanent negative evidence. Do not replace, rename, or delete it. A later container measurement does not cancel it.
+
+- Environment label: `native_m1_mac`
+- Host: Darwin arm64 / macOS 26.4.1 (25E253)
+- rustc: rustc 1.88.0 (6b00bc388 2025-06-23)
+- rustc host: `aarch64-apple-darwin`
+- Tip built: `1c73473c23b264e5eda6886d6a398fee95c73c2b`
+- Tree: `fb53525d125501e4be009b69cceaf3db262c8d51`
+- Measured Wasm SHA-256: `9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1` (878197 bytes)
+- Expected Wasm SHA-256: `2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba` (878189 bytes)
+- `cmp`: differs at byte 896
+- Both binaries preserved:
+  - Path A: `/Users/aiagents/mirra-path-c-m1/artifacts/path-a-mirra_canister.wasm`
+  - Native M1: `/Users/aiagents/mirra-path-c-m1/artifacts/mirra_canister.wasm`
+
+Paths A and B still hash to `2edf7aab…ac5aba`. This native M1 path does not match.
+
+Exact commands:
+
+```
+mkdir -p /Users/aiagents/mirra-path-c-m1/{cargo-home,target,artifacts}
+git clone --branch p1-surviving-bound-stage-2026-09-03 --single-branch https://github.com/Mitosis50/MIRRA.git /Users/aiagents/mirra-path-c-m1/src
+cd /Users/aiagents/mirra-path-c-m1/src && git rev-parse HEAD  # 1c73473c23b264e5eda6886d6a398fee95c73c2b
+git rev-parse 'HEAD^{tree}'  # fb53525d125501e4be009b69cceaf3db262c8d51
+unset RUSTC_WRAPPER SCCACHE_DIR SCCACHE CARGO_INCREMENTAL RUSTFLAGS RUSTUP_HOME
+export CARGO_INCREMENTAL=0
+export CARGO_HOME=/Users/aiagents/mirra-path-c-m1/cargo-home
+export CARGO_TARGET_DIR=/Users/aiagents/mirra-path-c-m1/target
+export PATH="$HOME/.cargo/bin:$PATH"
+bash scripts/build-wasm.sh
+sha256sum "$CARGO_TARGET_DIR/wasm32-unknown-unknown/release/mirra_canister.wasm"
+cp -a "$CARGO_TARGET_DIR/wasm32-unknown-unknown/release/mirra_canister.wasm" /Users/aiagents/mirra-path-c-m1/artifacts/mirra_canister.wasm
+cmp /Users/aiagents/mirra-path-c-m1/artifacts/path-a-mirra_canister.wasm /Users/aiagents/mirra-path-c-m1/artifacts/mirra_canister.wasm
+```
+
+`scripts/build-wasm.sh` hardcodes `cargo build --locked` and does not accept arguments.
 
 ## Continuity
 
-Changes from `b8c56a1…` to evidence tip `159d41bf…` are evidence / checksum / review / provenance / manifest-pin only.  
-No source, proof, checker, Cargo, build-script, Candid, or Wasm product changes. Paths A and B matched the reviewed Wasm bytes. That does not establish three-path reproducibility.
+Executable-source continuity from `b8c56a1…` remains evidence / checksum / review / provenance / manifest only for Paths A and B.  
+This amendment commit is docs / `REVIEW.json` / `SOURCE_MANIFEST.sha256` only.
 
-## Paths
+## Paths A and B
 
-| Path | Environment | Independent third host? | Wasm SHA-256 |
-|------|-------------|-------------------------|--------------|
-| A | GitHub Actions verification run [34170383195](https://github.com/Mitosis50/MIRRA/actions/runs/34170383195) artifact `10035602693` | n/a (path A) | `2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba` |
-| B | Clean Linux host (Debian 13 / rustc 1.88.0); fresh clone; fresh `CARGO_TARGET_DIR`; `scripts/build-wasm.sh` | n/a (path B) | `2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba` |
-| C | Withdrawn. Same Debian host/kernel as Path B. Fresh `CARGO_HOME` + `CARGO_TARGET_DIR` only. Docker `rust:1.88.0-bookworm` was not used. | **No** | historical process emitted `2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba`; does not count as a third path |
-
-`cmp` of those three binaries showed identical bytes. That result is historical only. It is not a three-path pass.
+| Path | Environment | Wasm SHA-256 | Match expected? |
+|------|-------------|----------------|-----------------|
+| A | GitHub Actions verification run [34170383195](https://github.com/Mitosis50/MIRRA/actions/runs/34170383195) artifact `10035602693` | `2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba` | yes |
+| B | Clean Linux host (Debian 13 / rustc 1.88.0); fresh clone; fresh `CARGO_TARGET_DIR`; `scripts/build-wasm.sh` | `2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba` | yes |
 
 ### Path A commands
 ```
@@ -60,33 +94,18 @@ sha256sum "$CARGO_TARGET_DIR/wasm32-unknown-unknown/release/mirra_canister.wasm"
 cp -a "$CARGO_TARGET_DIR/wasm32-unknown-unknown/release/mirra_canister.wasm" /workspace/mirra-repro/path-b/mirra_canister.wasm
 ```
 
-### Path C (withdrawn; not an independent host)
-```
-# Same Debian host/kernel as Path B. Not a genuine third environment.
-git checkout 159d41bf75e3543893396f67135e53e31c9d3f08
-export CARGO_HOME=…/path-c/env/cargo-home
-export CARGO_TARGET_DIR=…/path-c/env/target
-export CARGO_INCREMENTAL=0
-bash scripts/build-wasm.sh --locked
-```
+## Withdrawn prior same-Debian Path C
 
-Pending replacement: native M1 Mac rebuild, or a pinned container on that Mac if rustup cannot be installed there. Do not reuse the Grok Debian box for Path C.
-
-## Path C extra checks
-
-The withdrawn same-host process also ran certificate checker, Candid equality, 99 vectors, and a runtime witness. Those checks do not repair the missing independent host. They are not a three-path pass.
-
-## Fidelity
-
-The prior reviewer fidelity **PASS** is withdrawn. Independent re-hash showed matching bytes, but Path C was not a separate host. Three-path reproducibility remains **needs-work**.
+The earlier Path C labeled `fully_separate_clean_host_env` remains withdrawn as not an independent environment. It was the same Debian host/kernel as Path B. Separate `CARGO_HOME` / `CARGO_TARGET_DIR` do not count. That historical process emitted the expected hash; it does not establish three-path reproducibility. It is retained only as that withdrawal record. It is not the native M1 mismatch and must not be used to erase `native_m1_mac`.
 
 ## Policy
 
 - `REVIEW.json` `scope.provenance` = **needs-work** (unchanged)
 - `REVIEW.json` `overall` = **needs-work** (unchanged)
-- Three-path reproducibility = **needs-work** (pending genuine third host)
+- Three-path reproducibility = **needs-work** (not passed)
+- `native_m1_mac` mismatch = permanent failed path
 - Mainnet trusted-root verification = **open**
 - Release attestation = **open**
 - PR #8 not merge-cleared
 
-Machine-readable twin: `docs/THREE_PATH_REPRODUCIBILITY_2026-09-07.json`
+Machine-readable twin: `docs/THREE_PATH_REPRODUCIBILITY_2026-09-07.json` (`permanent_failed_paths.native_m1_mac`)

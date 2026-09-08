@@ -1,11 +1,11 @@
 {
   "schema": "mirra.p1.three-path-reproducibility.v1",
-  "status": "NEEDS_WORK_PENDING_GENUINE_THIRD_HOST",
+  "status": "NEEDS_WORK_NATIVE_M1_MISMATCH_RECORDED",
   "gate": "three_path_reproducibility",
   "decision": "needs-work",
   "observed_at_utc": "2026-09-07",
-  "recorded_at_utc": "2026-09-08T04:44:42Z",
-  "recorded_at_pt": "2026-09-07T21:44:42-0700",
+  "recorded_at_utc": "2026-09-08T04:57:30Z",
+  "recorded_at_pt": "2026-09-07T21:57:30-0700",
   "tip_commit": "159d41bf75e3543893396f67135e53e31c9d3f08",
   "tip_tree": "ee002b307e0f5b9f24cbe36fcc78e318d430ca9f",
   "reviewed_source_baseline": {
@@ -13,7 +13,7 @@
     "tree": "1d7bf27932859b42e2fad1736ea1bf47490d7e80",
     "executable_source_continuity": "evidence_checksum_review_provenance_manifest_only",
     "source_proof_checker_cargo_build_script_candid_wasm_unchanged": true,
-    "note": "Tip 159d41bf rebuilds produce the same Wasm bytes as the reviewed executable subject bound at b8c56a1."
+    "note": "Executable-source continuity from b8c56a1 remains evidence/checksum only for Paths A and B. Paths A and B still match the reviewed Wasm. This amendment commit is docs/REVIEW/SOURCE_MANIFEST only. The native_m1_mac mismatch is permanent negative evidence and is not evidence that A/B changed."
   },
   "expected_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
   "byte_identical_across_paths": false,
@@ -122,7 +122,10 @@
       },
       "qualifies_as_independent_third_environment": false,
       "withdrawn_as_third_path": true,
-      "withdrawal_reason": "Prior Path C labeled fully_separate_clean_host_env was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild."
+      "withdrawal_reason": "Prior Path C labeled fully_separate_clean_host_env was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild.",
+      "not_the_native_m1_record": true,
+      "superseded_as_independent_path_by": "permanent_failed_paths.native_m1_mac",
+      "withdrawal_remains": "Prior same-Debian Path C remains withdrawn as not an independent environment. This object is retained as that withdrawal record. It is not the native M1 mismatch and must not be used to erase native_m1_mac."
     }
   },
   "fidelity_review": {
@@ -131,12 +134,14 @@
     "reviewed_at_utc": "2026-09-07T23:52:07Z",
     "byte_identical_A_B_C": false,
     "caveats": [
-      "Prior Path C labeled fully_separate_clean_host_env was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild.",
-      "Path A BUILD_RECORD.source_commit 0c69388e diverges from evidence tip 159d41bf; A and B rebuilds match expected Wasm bytes.",
-      "This correction does not claim mainnet trusted-root verification or release attestation, and does not clear PR #8 to merge."
+      "Prior same-Debian Path C labeled fully_separate_clean_host_env remains withdrawn as not an independent environment.",
+      "permanent_failed_paths.native_m1_mac is permanent negative evidence: Darwin arm64 / macOS 26.4.1 (25E253), rustc 1.88.0 (6b00bc388 2025-06-23) host aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b, tree fb53525d125501e4be009b69cceaf3db262c8d51, measured 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1 (878197 bytes) vs expected 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba (878189 bytes); cmp differs at byte 896. Both binaries preserved. Do not replace, rename, or delete this record.",
+      "Paths A and B still match 2edf7aab\u2026ac5aba. This native M1 path does not.",
+      "This record does not set three_path_reproducibility to passed, does not claim mainnet or attestation, and does not clear PR #8 to merge."
     ],
-    "corrected_at_utc": "2026-09-08T04:44:42Z",
-    "note": "Prior fidelity PASS withdrawn. A and B hashes matched the expected Wasm, and the withdrawn Path C process emitted the same bytes, but Path C was not an independent host. Three-path reproducibility is not established."
+    "corrected_at_utc": "2026-09-08T04:57:30Z",
+    "note": "Three-path reproducibility remains needs-work. native_m1_mac is a permanent failed path, not a pass and not a pending placeholder.",
+    "byte_identical_A_B": true
   },
   "policy": {
     "scope_provenance": "needs-work",
@@ -145,22 +150,167 @@
     "mainnet_trusted_root_verification": "open",
     "release_attestation": "open",
     "pr8_merge_cleared": false,
-    "no_source_proof_checker_cargo_build_script_candid_wasm_changes_in_this_commit": true
+    "no_source_proof_checker_cargo_build_script_candid_wasm_changes_in_this_commit": true,
+    "flipped_three_path_to_passed": false
   },
-  "scope_note": "Retracts the three-path reproducibility pass. Prior Path C was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild. Does not flip REVIEW.json provenance or overall; does not claim mainnet verification or release attestation; does not clear PR #8 to merge.",
+  "scope_note": "Adds permanent failed path native_m1_mac. Does not replace, rename, or delete that mismatch. Prior same-Debian Path C remains withdrawn as not an independent environment. Paths A and B still match expected Wasm. three_path_reproducibility remains needs-work. Does not flip provenance or overall. Does not claim mainnet verification or release attestation. Does not clear PR #8 to merge. This commit is docs/REVIEW/SOURCE_MANIFEST only.",
   "correction": {
     "decision": "needs-work",
     "corrected_at_utc": "2026-09-08T04:44:42Z",
     "corrected_at_pt": "2026-09-07T21:44:42-0700",
     "supersedes_decision": "passed",
     "supersedes_recorded_at_utc": "2026-09-07T23:55:48Z",
-    "reason": "Prior Path C labeled fully_separate_clean_host_env was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild.",
+    "reason": "permanent_failed_paths.native_m1_mac recorded: hash 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1, 878197 bytes, cmp at byte 896. Prior same-Debian Path C remains withdrawn as not an independent environment. three_path_reproducibility remains needs-work. Do not replace, rename, or delete the native M1 mismatch.",
     "path_c_prior_label": "fully_separate_clean_host_env",
     "path_c_prior_host": "Debian GNU/Linux 13 (trixie); Linux cursor 6.12.94+ x86_64 \u2014 same host/kernel as Path B",
     "what_does_not_count": "separate CARGO_HOME and CARGO_TARGET_DIR on the same host",
-    "path_c_status": "pending_m1_mac_or_pinned_container_rebuild",
+    "path_c_status": "native_m1_mac_permanent_mismatch_recorded",
     "mainnet_trusted_root_verification": "open",
     "release_attestation": "open",
-    "pr8_merge_cleared": false
+    "pr8_merge_cleared": false,
+    "native_m1_recorded_at_utc": "2026-09-08T04:57:30Z",
+    "native_m1_recorded_at_pt": "2026-09-07T21:57:30-0700",
+    "prior_same_debian_path_c": "withdrawn_not_independent_environment",
+    "permanent_failed_path": "native_m1_mac",
+    "measured_wasm_sha256": "9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1",
+    "measured_wasm_bytes": 878197,
+    "expected_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+    "expected_wasm_bytes": 878189,
+    "cmp": "differ: char 896"
+  },
+  "paths_a_b_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+  "permanent_failed_paths": {
+    "native_m1_mac": {
+      "schema": "mirra.p1.path-c-m1.v1",
+      "record_id": "native_m1_mac",
+      "permanent": true,
+      "do_not_replace_rename_or_delete": true,
+      "environment_label": "native_m1_mac",
+      "decision": "needs-work",
+      "result": "mismatch",
+      "match_expected": false,
+      "recorded_at_utc": "2026-09-08T04:57:30Z",
+      "recorded_at_pt": "2026-09-07T21:57:30-0700",
+      "host": {
+        "kind": "native_m1_mac",
+        "identity": "Darwin arm64 / macOS",
+        "os": "Darwin arm64 / macOS 26.4.1 (25E253)",
+        "machineId": "8f5619b6-6eaf-4da5-b552-2a582cb7c713",
+        "hostname": "AIAgentss-Air.lan",
+        "uname_sm": "Darwin arm64",
+        "sw_vers": {
+          "ProductName": "macOS",
+          "ProductVersion": "26.4.1",
+          "BuildVersion": "25E253"
+        },
+        "docker_used": false,
+        "not_the_grok_debian_box": true
+      },
+      "toolchain": {
+        "rustc": "rustc 1.88.0 (6b00bc388 2025-06-23)",
+        "rustc_host": "aarch64-apple-darwin",
+        "cargo": "cargo 1.88.0 (873a06493 2025-05-10)",
+        "locked": true,
+        "locked_note": "scripts/build-wasm.sh hardcodes cargo build --locked; extra --locked was not passed to the script because it does not accept arguments"
+      },
+      "built_tip_commit": "1c73473c23b264e5eda6886d6a398fee95c73c2b",
+      "built_tip_tree": "fb53525d125501e4be009b69cceaf3db262c8d51",
+      "checkout": "/Users/aiagents/mirra-path-c-m1/src",
+      "commands": [
+        "mkdir -p /Users/aiagents/mirra-path-c-m1/{cargo-home,target,artifacts}",
+        "git clone --branch p1-surviving-bound-stage-2026-09-03 --single-branch https://github.com/Mitosis50/MIRRA.git /Users/aiagents/mirra-path-c-m1/src",
+        "cd /Users/aiagents/mirra-path-c-m1/src && git rev-parse HEAD  # 1c73473c23b264e5eda6886d6a398fee95c73c2b",
+        "git rev-parse 'HEAD^{tree}'  # fb53525d125501e4be009b69cceaf3db262c8d51",
+        "unset RUSTC_WRAPPER SCCACHE_DIR SCCACHE CARGO_INCREMENTAL RUSTFLAGS RUSTUP_HOME",
+        "export CARGO_INCREMENTAL=0",
+        "export CARGO_HOME=/Users/aiagents/mirra-path-c-m1/cargo-home",
+        "export CARGO_TARGET_DIR=/Users/aiagents/mirra-path-c-m1/target",
+        "export PATH=\"$HOME/.cargo/bin:$PATH\"",
+        "bash scripts/build-wasm.sh",
+        "sha256sum \"$CARGO_TARGET_DIR/wasm32-unknown-unknown/release/mirra_canister.wasm\"",
+        "cp -a \"$CARGO_TARGET_DIR/wasm32-unknown-unknown/release/mirra_canister.wasm\" /Users/aiagents/mirra-path-c-m1/artifacts/mirra_canister.wasm",
+        "cmp /Users/aiagents/mirra-path-c-m1/artifacts/path-a-mirra_canister.wasm /Users/aiagents/mirra-path-c-m1/artifacts/mirra_canister.wasm"
+      ],
+      "expected_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "expected_wasm_bytes": 878189,
+      "measured_wasm_sha256": "9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1",
+      "measured_wasm_bytes": 878197,
+      "cmp": "differ: char 896",
+      "cmp_byte": 896,
+      "both_binaries_preserved": true,
+      "preserved_binaries": {
+        "path_a": "/Users/aiagents/mirra-path-c-m1/artifacts/path-a-mirra_canister.wasm",
+        "native_m1": "/Users/aiagents/mirra-path-c-m1/artifacts/mirra_canister.wasm"
+      },
+      "paths_a_b_still_match_expected": true,
+      "paths_a_b_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "note": "Permanent negative evidence. Native Darwin arm64 rustc 1.88.0 produced a different Wasm than Paths A/B. Do not replace, rename, or delete this record. It is not cancelled by any later container measurement."
+    }
+  },
+  "native_m1_mac": {
+    "schema": "mirra.p1.path-c-m1.v1",
+    "record_id": "native_m1_mac",
+    "permanent": true,
+    "do_not_replace_rename_or_delete": true,
+    "environment_label": "native_m1_mac",
+    "decision": "needs-work",
+    "result": "mismatch",
+    "match_expected": false,
+    "recorded_at_utc": "2026-09-08T04:57:30Z",
+    "recorded_at_pt": "2026-09-07T21:57:30-0700",
+    "host": {
+      "kind": "native_m1_mac",
+      "identity": "Darwin arm64 / macOS",
+      "os": "Darwin arm64 / macOS 26.4.1 (25E253)",
+      "machineId": "8f5619b6-6eaf-4da5-b552-2a582cb7c713",
+      "hostname": "AIAgentss-Air.lan",
+      "uname_sm": "Darwin arm64",
+      "sw_vers": {
+        "ProductName": "macOS",
+        "ProductVersion": "26.4.1",
+        "BuildVersion": "25E253"
+      },
+      "docker_used": false,
+      "not_the_grok_debian_box": true
+    },
+    "toolchain": {
+      "rustc": "rustc 1.88.0 (6b00bc388 2025-06-23)",
+      "rustc_host": "aarch64-apple-darwin",
+      "cargo": "cargo 1.88.0 (873a06493 2025-05-10)",
+      "locked": true,
+      "locked_note": "scripts/build-wasm.sh hardcodes cargo build --locked; extra --locked was not passed to the script because it does not accept arguments"
+    },
+    "built_tip_commit": "1c73473c23b264e5eda6886d6a398fee95c73c2b",
+    "built_tip_tree": "fb53525d125501e4be009b69cceaf3db262c8d51",
+    "checkout": "/Users/aiagents/mirra-path-c-m1/src",
+    "commands": [
+      "mkdir -p /Users/aiagents/mirra-path-c-m1/{cargo-home,target,artifacts}",
+      "git clone --branch p1-surviving-bound-stage-2026-09-03 --single-branch https://github.com/Mitosis50/MIRRA.git /Users/aiagents/mirra-path-c-m1/src",
+      "cd /Users/aiagents/mirra-path-c-m1/src && git rev-parse HEAD  # 1c73473c23b264e5eda6886d6a398fee95c73c2b",
+      "git rev-parse 'HEAD^{tree}'  # fb53525d125501e4be009b69cceaf3db262c8d51",
+      "unset RUSTC_WRAPPER SCCACHE_DIR SCCACHE CARGO_INCREMENTAL RUSTFLAGS RUSTUP_HOME",
+      "export CARGO_INCREMENTAL=0",
+      "export CARGO_HOME=/Users/aiagents/mirra-path-c-m1/cargo-home",
+      "export CARGO_TARGET_DIR=/Users/aiagents/mirra-path-c-m1/target",
+      "export PATH=\"$HOME/.cargo/bin:$PATH\"",
+      "bash scripts/build-wasm.sh",
+      "sha256sum \"$CARGO_TARGET_DIR/wasm32-unknown-unknown/release/mirra_canister.wasm\"",
+      "cp -a \"$CARGO_TARGET_DIR/wasm32-unknown-unknown/release/mirra_canister.wasm\" /Users/aiagents/mirra-path-c-m1/artifacts/mirra_canister.wasm",
+      "cmp /Users/aiagents/mirra-path-c-m1/artifacts/path-a-mirra_canister.wasm /Users/aiagents/mirra-path-c-m1/artifacts/mirra_canister.wasm"
+    ],
+    "expected_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+    "expected_wasm_bytes": 878189,
+    "measured_wasm_sha256": "9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1",
+    "measured_wasm_bytes": 878197,
+    "cmp": "differ: char 896",
+    "cmp_byte": 896,
+    "both_binaries_preserved": true,
+    "preserved_binaries": {
+      "path_a": "/Users/aiagents/mirra-path-c-m1/artifacts/path-a-mirra_canister.wasm",
+      "native_m1": "/Users/aiagents/mirra-path-c-m1/artifacts/mirra_canister.wasm"
+    },
+    "paths_a_b_still_match_expected": true,
+    "paths_a_b_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+    "note": "Permanent negative evidence. Native Darwin arm64 rustc 1.88.0 produced a different Wasm than Paths A/B. Do not replace, rename, or delete this record. It is not cancelled by any later container measurement."
   }
 }

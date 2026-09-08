@@ -16,7 +16,7 @@
   },
   "overall": "needs-work",
   "math_bound_outward": "0.500000043",
-  "notes": "Mathematics of staged absolute-error candidate accepted; release intake blocked on compiled correspondence, CI Wasm provenance, and human REVIEW.json reconciliation. Compiled correspondence accepted via formal APPROVE https://github.com/Mitosis50/MIRRA/pull/10#pullrequestreview-5135558028 (rjc-chief-of-staff[bot], 2026-09-07T22:33:23Z). Provenance/overall remain needs-work pending remaining release gates. Three-path reproducibility is needs-work, not passed: prior Path C labeled fully_separate_clean_host_env was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild. See docs/THREE_PATH_REPRODUCIBILITY_2026-09-07.json. Mainnet and attestation remain open. PR #8 is not merge-cleared.",
+  "notes": "Mathematics of staged absolute-error candidate accepted; release intake blocked on compiled correspondence, CI Wasm provenance, and human REVIEW.json reconciliation. Compiled correspondence accepted via formal APPROVE https://github.com/Mitosis50/MIRRA/pull/10#pullrequestreview-5135558028 (rjc-chief-of-staff[bot], 2026-09-07T22:33:23Z). Provenance/overall remain needs-work pending remaining release gates. Three-path reproducibility remains needs-work, not passed. Permanent failed path native_m1_mac: Darwin arm64 / macOS 26.4.1 (25E253), rustc 1.88.0 (6b00bc388 2025-06-23) host aarch64-apple-darwin, tip built 1c73473c23b264e5eda6886d6a398fee95c73c2b, tree fb53525d125501e4be009b69cceaf3db262c8d51, measured wasm 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1 (878197 bytes) does not match expected 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba (878189 bytes); cmp differs at byte 896. Both binaries preserved. Paths A and B still match 2edf7aab\u2026ac5aba. Prior same-Debian Path C labeled fully_separate_clean_host_env remains withdrawn as not an independent environment. Do not replace, rename, or delete the native_m1_mac mismatch. See docs/THREE_PATH_REPRODUCIBILITY_2026-09-07.json. Executable-source continuity from b8c56a1 remains evidence/checksum only for A/B; this commit is docs/REVIEW/manifest only. Mainnet and attestation remain open. PR #8 is not merge-cleared.",
   "compiled_correspondence_review": {
     "schema": "mirra.p1.compiled-correspondence-review.v1",
     "decision": "accepted",
@@ -46,8 +46,29 @@
     "mainnet": "open",
     "attestation": "open",
     "corrected_at_utc": "2026-09-08T04:44:42Z",
-    "reason": "Prior Path C labeled fully_separate_clean_host_env was the same Debian host/kernel as Path B; separate CARGO_HOME/target do not count as an independent third environment. Path C pending M1 Mac (or pinned container) rebuild.",
-    "path_c_status": "pending_m1_mac_or_pinned_container_rebuild",
-    "independent_third_path": false
+    "reason": "Permanent failed path native_m1_mac: measured 9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1 (878197 bytes) does not match expected 2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba (878189 bytes). cmp differs at byte 896. Paths A and B still match the expected hash. Prior same-Debian Path C remains withdrawn as not an independent environment. Three-path reproducibility remains needs-work.",
+    "path_c_status": "native_m1_mac_permanent_mismatch_recorded",
+    "independent_third_path": false,
+    "paths_a_b_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+    "permanent_failed_path": "native_m1_mac",
+    "native_m1_mac": {
+      "environment_label": "native_m1_mac",
+      "permanent": true,
+      "do_not_replace_rename_or_delete": true,
+      "host": "Darwin arm64 / macOS 26.4.1 (25E253)",
+      "rustc": "rustc 1.88.0 (6b00bc388 2025-06-23)",
+      "rustc_host": "aarch64-apple-darwin",
+      "built_tip": "1c73473c23b264e5eda6886d6a398fee95c73c2b",
+      "built_tree": "fb53525d125501e4be009b69cceaf3db262c8d51",
+      "measured_wasm_sha256": "9e32af00502fd7197850407a4b85ea793ccd0530936e6cc7f1495343120feac1",
+      "measured_wasm_bytes": 878197,
+      "expected_wasm_sha256": "2edf7aaba7e1e4eaf781349dc99e3425257d6f777b4d333c509c9538d2ac5aba",
+      "expected_wasm_bytes": 878189,
+      "cmp": "differ: char 896",
+      "match_expected": false,
+      "both_binaries_preserved": true
+    },
+    "prior_same_debian_path_c": "withdrawn_not_independent_environment",
+    "cited_mismatch_at_utc": "2026-09-08T04:57:30Z"
   }
 }
