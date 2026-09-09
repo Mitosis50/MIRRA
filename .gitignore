@@ -1,6 +1,7 @@
 /target/
 /target-*/
 /integration-tests/target/
+/verification/mainnet-verifier/target/
 /.dfx/
 __pycache__/
 *.pyc

@@ -1,0 +1,17 @@
+[package]
+name = "mirra-mainnet-verifier"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.88"
+publish = false
+
+[dependencies]
+candid = "=0.10.35"
+hex = "=0.4.3"
+ic-agent = "=0.45.0"
+ic-certification = { version = "=3.2.0", features = ["serde"] }
+reqwest = { version = "=0.12.28", default-features = false, features = ["rustls-tls-webpki-roots"] }
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_cbor = "=0.11.2"
+sha2 = "=0.10.9"
+tokio = { version = "=1.53.1", features = ["macros", "rt-multi-thread"] }
