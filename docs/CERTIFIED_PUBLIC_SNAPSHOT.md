@@ -22,6 +22,12 @@ the commitment and ICP data certificate. A relying party must:
 It intentionally does not claim to verify the ICP certificate; that requires
 the canister ID and a trusted ICP certificate-verification implementation.
 
+`verification/mainnet-verifier` performs all four steps for the pinned initial
+mainnet deployment. It also checks the installed module hash, exact controller
+set, governance principal, and initial-state invariants. It uses `ic-agent`'s
+hard-coded IC mainnet root key and deliberately never fetches a replacement
+root key from the network.
+
 This primitive is deliberately small. It is useful to wallets, agents,
 indexers, DAOs, and research pipelines because they can pin one protocol
 fingerprint and detect silent arithmetic, artifact, or state substitutions.
