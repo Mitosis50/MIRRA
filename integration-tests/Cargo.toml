@@ -9,5 +9,5 @@ candid = "=0.10.35"
 ic-agent = "=0.45.0"
 ic-certification = { version = "=3.2.0", features = ["serde"] }
 mirra_canister = { path = ".." }
-pocket-ic = "=15.0.0"
+pocket-ic = "=16.0.0"
 serde_cbor = "=0.11.2"
