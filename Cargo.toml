@@ -9,7 +9,7 @@ description = "Deterministic correction-weighting canister for ICP"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-candid = "=0.10.35"
+candid = "=0.10.38"
 hex = "=0.4.3"
 ic-cdk = "=0.17.2"
 ic-stable-structures = "=0.6.9"
